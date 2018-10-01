@@ -165,5 +165,22 @@ class Bottle extends \yii\db\ActiveRecord
   }
 
 
+  /**
+   * main NEW BOTTLE firstModal
+   */
+  public static function getFirstModal()
+  {
+    $firstModal = self::find()
+        ->asArray()//вывести массивом
+        ->where(['status' => 'new'])//условие по столбцу 'status' со значением 'new'
+        ->limit(2)
+        ->orderBy('RAND()')
+        // ->orderBy('number DESC')
+        ->all();
+
+    return $firstModal;
+  }
+
+
 
 }

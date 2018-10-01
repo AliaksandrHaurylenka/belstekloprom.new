@@ -5,7 +5,6 @@ Yii2 Locale URLs
 [![Latest Stable Version](https://poser.pugx.org/codemix/yii2-localeurls/v/stable.svg)](https://packagist.org/packages/codemix/yii2-localeurls)
 [![Total Downloads](https://poser.pugx.org/codemix/yii2-localeurls/downloads)](https://packagist.org/packages/codemix/yii2-localeurls)
 [![Latest Unstable Version](https://poser.pugx.org/codemix/yii2-localeurls/v/unstable.svg)](https://packagist.org/packages/codemix/yii2-localeurls)
-[![HHVM Status](http://hhvm.h4cc.de/badge/yiisoft/yii2-dev.png)](http://hhvm.h4cc.de/package/codemix/yii2-localeurls)
 [![License](https://poser.pugx.org/codemix/yii2-localeurls/license.svg)](https://packagist.org/packages/codemix/yii2-localeurls)
 
 
@@ -146,8 +145,7 @@ language code are no longer accessible:
 ### Language Configuration
 
 All languages **including the default language** must be configured in the `languages`
-parameter of the `localeUrls` component. You should list more specific language
-codes before the similar looking generic ones (i.e. 'en-US' before 'en'):
+parameter of the `localeUrls` component:
 
     'languages' => ['en-US', 'en-UK', 'en', 'fr', 'de-AT', 'de'],
 
@@ -221,6 +219,7 @@ You can modify other persistence settings with:
  * `languageCookieName`: The name of the language cookie. Default is `_language`.
  * `languageCookieOptions`: Other options to set on the language cookie.
  * `languageSessionKey`: The name of the language session key. Default is `_language`.
+    Since 1.6.0 this can also be set to `false` to not use the session at all.
 
 #### Reset To Default Language
 
@@ -250,6 +249,43 @@ you can also pass an empty string as language:
 This will give you:
 
     /demo/action
+
+
+#### Language Change Event
+
+When persistence is enabled, the component will fire a `languageChanged` event
+whenever the language stored in session or cookie changes. Here's an example
+how this can be used to track user languages in the database:
+
+```php
+<?php
+
+'urlManager' => [
+    'class' => 'codemix\localeurls\UrlManager',
+    'languages' => ['en', 'fr', 'de'],
+    'on languageChanged' => `\app\components\User::onLanguageChanged',
+]
+```
+
+The static class method in `User` could look like this:
+
+```php
+<?php
+public static function onLanguageChanged($event)
+{
+    // $event->language: new language
+    // $event->oldLanguage: old language
+
+    // Save the current language to user record
+    $user = Yii::$app->user;
+    if (!$user->isGuest) {
+        $user->identity->language = $event->language;
+        $user->identity->save();
+    }
+}
+```
+> **Note:** A language may already have been selected before a user logs in or
+> signs up. So you should also save or update the language in these cases.
 
 
 ### Language Detection
@@ -290,6 +326,27 @@ Accept-Language Header              | Resulting URL code    | Resulting Yii lang
 `pt-PT`, `pt-pt`                    | `/pt-pt`              | `pt-PT`
 Any other `pt-CC` code              | `/pt-cc`              | `pt-CC`
 `pt`                                | `/pt`                 | `pt`
+
+
+#### Detection via GeoIP server module
+
+Since 1.7.0 language can also be detected via the webserver's GeoIP module.
+Note though that this only happens if no valid language was found in the
+browser settings.
+
+For this feature to work the related GeoIp module must already be installed and
+it must provide the country code in a server variable in `$_SERVER`. You can
+configure the key in `$geoIpServerVar`. The default is `HTTP_X_GEO_COUNTRY`.
+
+To enable this feature, you have to provide a list of GeoIp country codes and
+index them by the corresponding language that should be set:
+
+```php
+'geoIpLanguageCountries' => [
+    'de' => ['DEU', 'AUT'],
+    'pt' => ['PRT', 'BRA'],
+],
+```
 
 
 ### Excluding Routes / URLs

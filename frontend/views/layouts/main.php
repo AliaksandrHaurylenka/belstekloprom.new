@@ -12,6 +12,7 @@ use frontend\components\LogoMenuWidget;
 use frontend\components\BannersWidget;
 use frontend\components\FooterWidget;
 use frontend\components\MenuMobilWidget;
+use frontend\components\firstModalWidget;
 
 
 AppAsset::register($this);
@@ -43,6 +44,13 @@ set_time_limit (3);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
+
+  <div style="display: none;">
+    <div class="box-modal" id="firstModal">
+      <div class="box-modal_close arcticmodal-close">&times;</div>
+      <?= firstModalWidget::widget(); ?>
+    </div>
+  </div>
 
   <?= TopWidget::widget(); ?>
 

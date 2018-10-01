@@ -5,6 +5,11 @@ php:
 install:
   - sudo apt-get update
   - travis_retry composer self-update && composer --version
-  - travis_retry composer global require --no-progress "fxp/composer-asset-plugin:^1.2.0"
+  - travis_retry composer clear-cache
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - travis_retry composer install --prefer-dist --no-interaction --no-progress
+  - travis_retry composer require --dev phpunit/phpunit:^6.0 --prefer-dist --no-interaction --no-progress
+
+script:
+  - php -doutput_buffering=On vendor/bin/phpunit
+

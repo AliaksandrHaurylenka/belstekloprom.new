@@ -9,12 +9,14 @@ use yii\helpers\Html;
 <footer class="gr_footer">
 	<div class="container d-flex flex-row justify-content-between footer-info">
 		<div class="d-flex flex-column footer-logo">
-			<div class="d-flex flex-row">
-				<a href="/" class="p-1"><img src="/images/logo.png" alt="Логотип"></a>
-				<h2><?= Html::a(Yii::t('common', 'БелСтеклоПром'), ['site/index']) ?></h2>
-			</div>
-				<h3 class="mb-4"><?= Html::a(Yii::t('common', 'производство стеклотары'), ['site/index']) ?></h3>
-			<?= CounterWidget::widget(); ?>
+      <div class="d-flex mb-4">
+        <a href="/" class="p-1"><img src="/images/logonew1.png" alt="Логотип"></a>
+        <div class="d-flex flex-column">
+          <h2><?= Html::a(Yii::t('common', 'БелСтеклоПром'), ['site/index']) ?></h2>
+          <h3><?= Html::a(Yii::t('common', 'производство стеклотары'), ['site/index']) ?></h3>
+        </div>
+      </div>
+      <?= CounterWidget::widget(); ?>
 		</div>
 
 		<?php
@@ -23,7 +25,7 @@ use yii\helpers\Html;
 				['label' => Yii::t('common', 'Бутылка с венчиком КПНв'), 'url' => ['site/bottle-kpnv']],
 				['label' => Yii::t('common', 'Бутылка с венчиком КПНн'), 'url' => ['site/bottle-kpnn']],
 				['label' => Yii::t('common', 'Бутылка с венчиком ВКП'), 'url' => ['site/bottle-vkp']],
-				['label' => Yii::t('common', 'Бутылка винная'), 'url' => ['site/bottle-other']],
+				['label' => Yii::t('common', 'Бутылки'), 'url' => ['site/bottle-other']],
 				['label' => Yii::t('common', 'Архив изделий'), 'url' => ['site/bottle-archive']],
 			],
 			'itemOptions' => ['class' => 'nav-item'],//добавляет класс тегу li

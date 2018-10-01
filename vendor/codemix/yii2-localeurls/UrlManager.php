@@ -17,6 +17,8 @@ use yii\web\UrlNormalizerRedirectException;
  */
 class UrlManager extends BaseUrlManager
 {
+    const EVENT_LANGUAGE_CHANGED = 'languageChanged';
+
     /**
      * @var array list of available language codes. More specific patterns
      * should come first, e.g. 'en_us' before 'en'. This can also contain
@@ -38,7 +40,7 @@ class UrlManager extends BaseUrlManager
      * contains the default language code will be redirected to the same URL
      * without a language code. So if the default language is `fr` and a user
      * requests `/fr/some/page` he gets redirected to `/some/page`. This way
-     * the persistet language can be reset to the default language.
+     * the persistent language can be reset to the default language.
      *
      * If this is `true`, then an URL that does not contain any language code
      * will be redirected to the same URL with default language code. So if for
@@ -70,8 +72,8 @@ class UrlManager extends BaseUrlManager
     public $keepUppercaseLanguageCode = false;
 
     /**
-     * @var string the name of the session key that is used to store the
-     * language. Default is '_language'.
+     * @var string|bool the name of the session key that is used to store the
+     * language. If `false` no session is used. Default is '_language'.
      */
     public $languageSessionKey = '_language';
 
@@ -131,6 +133,27 @@ class UrlManager extends BaseUrlManager
      * used.
      */
     public $languageParam = 'language';
+
+    /**
+     * @var string the key in $_SERVER that contains the detected GeoIP country.
+     * Default is 'HTTP_X_GEO_COUNTRY' as used by mod_geoip in apache.
+     */
+    public $geoIpServerVar = 'HTTP_X_GEO_COUNTRY';
+
+    /**
+     * @var array list of GeoIP countries indexed by corresponding language
+     * code. The default is an empty list which disables GeoIP detection.
+     * Example:
+     *
+     * ~~~php
+     * [
+     *     // Set app language to 'ru' for these GeoIp countries
+     *     'ru' => ['RUS','AZE','ARM','BLR','KAZ','KGZ','MDA','TJK','TKM','UZB','UKR']
+     *
+     * ]
+     * ~~~
+     */
+    public $geoIpLanguageCountries = [];
 
     /**
      * @var \yii\web\Request
@@ -220,7 +243,7 @@ class UrlManager extends BaseUrlManager
 
             $isLanguageGiven = isset($params[$this->languageParam]);
             $language = $isLanguageGiven ? $params[$this->languageParam] : Yii::$app->language;
-            $isDefaultLanguage = $language===$this->getDefaultLanguage();
+            $isDefaultLanguage = $language === $this->getDefaultLanguage();
 
             if ($isLanguageGiven) {
                 unset($params[$this->languageParam]);
@@ -321,7 +344,7 @@ class UrlManager extends BaseUrlManager
         $parts = [];
         foreach ($this->languages as $k => $v) {
             $value = is_string($k) ? $k : $v;
-            if (substr($value, -2)==='-*') {
+            if (substr($value, -2) === '-*') {
                 $lng = substr($value, 0, -2);
                 $parts[] = "$lng\-[a-z]{2,3}";
                 $parts[] = $lng;
@@ -329,6 +352,15 @@ class UrlManager extends BaseUrlManager
                 $parts[] = $value;
             }
         }
+        // order by length to make longer patterns match before short patterns, e.g. put "en-GB" before "en"
+        usort($parts, function($a, $b) {
+            $la = mb_strlen($a);
+            $lb = mb_strlen($b);
+            if ($la === $lb) {
+                return 0;
+            }
+            return $la < $lb ? 1 : -1;
+        });
         $pattern = implode('|', $parts);
         if (preg_match("#^($pattern)\b(/?)#i", $pathInfo, $m)) {
             $this->_request->setPathInfo(mb_substr($pathInfo, mb_strlen($m[1].$m[2])));
@@ -340,39 +372,25 @@ class UrlManager extends BaseUrlManager
                 // lowercase language, uppercase country
                 list($language,$country) = $this->matchCode($code);
                 if ($country!==null) {
-                    if ($code==="$language-$country" && !$this->keepUppercaseLanguageCode) {
+                    if ($code === "$language-$country" && !$this->keepUppercaseLanguageCode) {
                         $this->redirectToLanguage(strtolower($code));   // Redirect ll-CC to ll-cc
                     } else {
                         $language = "$language-$country";
                     }
                 }
-                if ($language===null) {
+                if ($language === null) {
                     $language = $code;
                 }
             }
             Yii::$app->language = $language;
             Yii::trace("Language code found in URL. Setting application language to '$language'.", __METHOD__);
             if ($this->enableLanguagePersistence) {
-                Yii::$app->session[$this->languageSessionKey] = $language;
-                Yii::trace("Persisting language '$language' in session.", __METHOD__);
-                if ($this->languageCookieDuration) {
-                    $cookie = new Cookie(array_merge(
-                        ['httpOnly' => true],
-                        $this->languageCookieOptions,
-                        [
-                            'name' => $this->languageCookieName,
-                            'value' => $language,
-                            'expire' => time() + (int) $this->languageCookieDuration,
-                        ]
-                    ));
-                    Yii::$app->getResponse()->getCookies()->add($cookie);
-                    Yii::trace("Persisting language '$language' in cookie.", __METHOD__);
-                }
+                $this->persistLanguage($language);
             }
 
             // "Reset" case: We called e.g. /fr/demo/page so the persisted language was set back to "fr".
             // Now we can redirect to the URL without language prefix, if default prefixes are disabled.
-            $reset = !$this->enableDefaultLanguageUrlCode && $language===$this->_defaultLanguage;
+            $reset = !$this->enableDefaultLanguageUrlCode && $language === $this->_defaultLanguage;
 
             if ($reset || $normalized) {
                 $this->redirectToLanguage('');
@@ -380,24 +398,12 @@ class UrlManager extends BaseUrlManager
         } else {
             $language = null;
             if ($this->enableLanguagePersistence) {
-                $language = Yii::$app->session->get($this->languageSessionKey);
-                $language!==null && Yii::trace("Found persisted language '$language' in session.", __METHOD__);
-                if ($language===null) {
-                    $language = $this->_request->getCookies()->getValue($this->languageCookieName);
-                    $language!==null && Yii::trace("Found persisted language '$language' in cookie.", __METHOD__);
-                }
+                $language = $this->loadPersistedLanguage();
             }
-            if ($language===null && $this->enableLanguageDetection) {
-                foreach ($this->_request->getAcceptableLanguages() as $acceptable) {
-                    list($language,$country) = $this->matchCode($acceptable);
-                    if ($language!==null) {
-                        $language = $country===null ? $language : "$language-$country";
-                        Yii::trace("Detected browser language '$language'.", __METHOD__);
-                        break;
-                    }
-                }
+            if ($language === null) {
+                $language = $this->detectLanguage();
             }
-            if ($language===null || $language===$this->_defaultLanguage) {
+            if ($language === null || $language === $this->_defaultLanguage) {
                 if (!$this->enableDefaultLanguageUrlCode) {
                     return;
                 } else {
@@ -405,7 +411,7 @@ class UrlManager extends BaseUrlManager
                 }
             }
             // #35: Only redirect if a valid language was found
-            if ($this->matchCode($language)===[null, null]) {
+            if ($this->matchCode($language) === [null, null]) {
                 return;
             }
 
@@ -417,6 +423,84 @@ class UrlManager extends BaseUrlManager
                 $language = strtolower($language);
             }
             $this->redirectToLanguage($language);
+        }
+    }
+
+    /**
+     * @param string $language the language code to persist in session and cookie
+     */
+    protected function persistLanguage($language)
+    {
+        if ($this->hasEventHandlers(self::EVENT_LANGUAGE_CHANGED)) {
+            $oldLanguage = $this->loadPersistedLanguage();
+            if ($oldLanguage !== $language) {
+                Yii::trace("Triggering languageChanged event: $oldLanguage -> $language", __METHOD__);
+                $this->trigger(self::EVENT_LANGUAGE_CHANGED, new LanguageChangedEvent([
+                    'oldLanguage' => $oldLanguage,
+                    'language' => $language,
+                ]));
+            }
+        }
+        if ($this->languageSessionKey !== false) {
+            Yii::$app->session[$this->languageSessionKey] = $language;
+            Yii::trace("Persisting language '$language' in session.", __METHOD__);
+        }
+        if ($this->languageCookieDuration) {
+            $cookie = new Cookie(array_merge(
+                ['httpOnly' => true],
+                $this->languageCookieOptions,
+                [
+                    'name' => $this->languageCookieName,
+                    'value' => $language,
+                    'expire' => time() + (int) $this->languageCookieDuration,
+                ]
+            ));
+            Yii::$app->getResponse()->getCookies()->add($cookie);
+            Yii::trace("Persisting language '$language' in cookie.", __METHOD__);
+        }
+    }
+
+    /**
+     * @return string|null the persisted language code or null if none found
+     */
+    protected function loadPersistedLanguage()
+    {
+        $language = null;
+        if ($this->languageSessionKey !== false) {
+            $language = Yii::$app->session->get($this->languageSessionKey);
+            $language!==null && Yii::trace("Found persisted language '$language' in session.", __METHOD__);
+        }
+        if ($language === null) {
+            $language = $this->_request->getCookies()->getValue($this->languageCookieName);
+            $language!==null && Yii::trace("Found persisted language '$language' in cookie.", __METHOD__);
+        }
+        return $language;
+    }
+
+    /**
+     * @return string|null the language detected from request headers or via
+     * GeoIp module
+     */
+    protected function detectLanguage()
+    {
+        if ($this->enableLanguageDetection) {
+            foreach ($this->_request->getAcceptableLanguages() as $acceptable) {
+                list($language,$country) = $this->matchCode($acceptable);
+                if ($language!==null) {
+                    $language = $country === null ? $language : "$language-$country";
+                    Yii::trace("Detected browser language '$language'.", __METHOD__);
+                    return $language;
+                }
+            }
+        }
+        if (isset($_SERVER[$this->geoIpServerVar])) {
+            foreach ($this->geoIpLanguageCountries as $key => $codes) {
+                $country = $_SERVER[$this->geoIpServerVar];
+                if (in_array($country, $codes)) {
+                    Yii::trace("Detected GeoIp language '$key'.", __METHOD__);
+                    return $key;
+                }
+            }
         }
     }
 
@@ -480,7 +564,7 @@ class UrlManager extends BaseUrlManager
         $language = $code;
         $country = null;
         $parts = explode('-', $code);
-        if (count($parts)===2) {
+        if (count($parts) === 2) {
             $language = $parts[0];
             $country = strtoupper($parts[1]);
         }
@@ -532,7 +616,7 @@ class UrlManager extends BaseUrlManager
         array_unshift($params, $route);
         $url = $this->createUrl($params);
         // Required to prevent double slashes on generated URLs
-        if ($this->suffix==='/' && $route==='' && count($params)===1) {
+        if ($this->suffix === '/' && $route === '' && count($params) === 1) {
             $url = rtrim($url, '/').'/';
         }
         // Prevent redirects to same URL which could happen in certain

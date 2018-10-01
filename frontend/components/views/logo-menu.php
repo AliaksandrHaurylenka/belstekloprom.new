@@ -1,6 +1,6 @@
 <!-- Логотип, меню -->
 <div class="d-flex flex-column col-md-3 hidden-sm-down">
-  <div class="logo"><a href="/"><img src="/images/logo.jpg" alt="Логотип"></a></div>
+  <div class="logo"><a href="/"><img src="/images/logonew.jpg" alt="Логотип"></a></div>
   <nav class="main_menu"><!--h-100 высота 100%-->
     <?php
     echo yii\widgets\Menu::widget([
@@ -20,7 +20,7 @@
 	              ['label' => Yii::t('common', 'Венчик КПНв'), 'url' => ['site/bottle-kpnv']],
 	              ['label' => Yii::t('common', 'Венчик КПНн'), 'url' => ['site/bottle-kpnn']],
 	              ['label' => Yii::t('common', 'Венчик ВКП'), 'url' => ['site/bottle-vkp']],
-	              ['label' => Yii::t('common', 'Венчик винный'), 'url' => ['site/bottle-other']],
+	              ['label' => Yii::t('common', 'Венчики'), 'url' => ['site/bottle-other']],
 	              ['label' => Yii::t('common', 'Архив изделий'), 'url' => ['site/bottle-archive']],
               ],
             //шаблон тэга li выпадающего меню

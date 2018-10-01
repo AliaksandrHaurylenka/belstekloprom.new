@@ -17,7 +17,7 @@ $this->title = Yii::t('common', 'БелСтеклоПром.Производст
 <!--Первый блок-->
 <div class="d-flex main-first-block">
 	<div class="col-sm-4 no-gutters d-flex justify-content-center align-items-center hidden-sm-down animation"><img
-			src="/images/animation.gif" alt="Анимация"></div>
+			src="/images/animation-newlogo.gif" alt="Анимация"></div>
 	<div class="col-sm-8 no-gutters d-flex justify-content-around align-items-center  hidden-sm-down certificate">
     <?= CertificateWidget::widget(); ?>
   </div>

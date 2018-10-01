@@ -7,10 +7,10 @@ return [
 	//Перевод footer
 	'БелСтеклоПром' => 'BelStekloProm',
 	'производство стеклотары' => 'The production of glass bottle',
-	'Бутылка с венчиком КПНв' => 'Bottle stopper ring КПНв',
-	'Бутылка с венчиком КПНн' => 'Bottle stopper ring КПНн',
-	'Бутылка с венчиком ВКП' => 'Bottle stopper ring ВКП',
-	'Бутылка винная' => 'Bottle wine',
+	'Бутылка с венчиком КПНв' => 'Bottle with finish КПНв',
+	'Бутылка с венчиком КПНн' => 'Bottle with finish КПНн',
+	'Бутылка с венчиком ВКП' => 'Bottle with finish ВКП',
+	'Бутылки' => 'Bottles',
 
 	//Перевод главного меню
 	'Главная' => 'Home',
@@ -19,10 +19,10 @@ return [
 	'Галерея' => 'Gallery',
 	'Закупки' => 'Purchase',
 	'Контакты' => 'Contacts',
-	'Венчик КПНв' => 'Stopper ring КПНв',
-	'Венчик КПНн' => 'Stopper ring КПНн',
-	'Венчик ВКП' => 'Stopper ring ВКП',
-	'Венчик винный' => 'Wine stopper ring',
+	'Венчик КПНв' => 'Finish КПНв',
+	'Венчик КПНн' => 'Finish КПНн',
+	'Венчик ВКП' => 'Finish ВКП',
+	'Венчики' => 'Finishes',
 	'Архив изделий' => 'Archive products',
 
 	//Перевод блоков на Главной странице
@@ -43,21 +43,21 @@ return [
 
 	//Продукция
 	'обратная связь' => 'feedback',
-	'Стеклянные бутылки с высоким венчиком КПНв' => 'Bottles with  hight ring КПНв ',
-	'венчик высокий под кроненпробку' => 'The hight stopper ring with The crown cork',
-	'Стеклянные бутылки с низким венчиком КПНн' => 'Bottles with low stopper ring КПНн',
-	'венчик низкий под кроненпробку' => 'low stopper ring with The crown cork',
-	'Стеклянные бутылки с твистовым венчиком ВКП' => 'Bottles with a twist stopper ring ВКП ',
-	'венчик комбинированный под укупорку винтовым колпачком' => 'Stopper ring combined with screw cap',
-	'Стеклянные бутылки под вино, шампанское' => 'Wine and Champagne bottles',
-	'Стеклянные бутылки с венчиком типа' => 'Bottles with Stopper ring ',
+	'Стеклянные бутылки с высоким венчиком КПНв' => 'Bottles with  hight finish КПНв ',
+	'венчик высокий под кроненпробку' => 'the hight finish with the crown cork',
+	'Стеклянные бутылки с низким венчиком КПНн' => 'Bottles with low finish КПНн',
+	'венчик низкий под кроненпробку' => 'low finish with the crown cork',
+	'Стеклянные бутылки с твистовым венчиком ВКП' => 'Bottles with a twist finish ВКП ',
+	'венчик комбинированный под укупорку винтовым колпачком' => 'finish combined with screw cap',
+	'Стеклянные бутылки' => 'Bottles',
+	'Стеклянные бутылки с венчиком типа' => 'Bottles with finish type',
 	'Обозначение' => 'Designation',
-	'Тип венчика' => 'Type',
+	'Тип венчика' => 'Type finish',
 	'Высота' => 'Height',
 	'Макс. диаметр' => 'Max. diameter',
 	'Объем' => 'The volume',
 	'Вес изделия' => 'Product weight',
-	'Венчик ' => 'Stopper ring ',
+	'Венчик ' => 'Finish ',
 
 	//Контакты
 	'БелСтеклоПром.Контакты' => 'BelStekloProm.Contacts',

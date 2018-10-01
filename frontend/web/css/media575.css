@@ -1,0 +1,37 @@
+@media screen and (max-width: 575px) {
+	/*Шапка, основная навигация*/
+	header .logo {display: none;}
+    nav.main_menu ul li {font-size: 2.1em;}
+  
+     /*ФУТЕР*/
+    .footer-info {
+      padding-right: 0;
+      padding-left: 0;
+    }
+    .footer-phone-mail {margin-right: 1%;}
+
+    /*ГЛАВНАЯ*/
+    /*первый блок*/
+    .certificate img {width: 10em;}
+
+    /*ЗАКУПКИ*/
+    .purchase-window {width: 95% !important;}
+
+
+    /*ГАЛЕРЕЯ*/
+    /*prettyPhoto*/
+    .home-portfolio-text h2 {
+        font-size: 1.45rem;
+    }
+
+
+    /*ПРОДУКЦИЯ*/
+    .product-img-info {margin-top: 2%;}
+
+    /*КОНТАКТЫ*/
+    .address-mobil {
+        padding-left: 9px;
+        padding-right: 20px;
+    }
+
+}

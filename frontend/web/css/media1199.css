@@ -1,0 +1,15 @@
+@media screen and (max-width: 1199px) {
+/*Шапка, основная навигация*/
+   nav.main_menu ul li {font-size: 2.5em;}
+
+    /*выпадающее меню*/
+    li.dropdown ul li {
+        font-size: 1.5rem;
+    }
+
+ /*ГЛАВНАЯ*/
+    .main-second-block h1 {font-size: 2.3rem;}
+    /*наши преимущества*/
+    .advantages p {padding: .5rem !important;}
+ 
+}

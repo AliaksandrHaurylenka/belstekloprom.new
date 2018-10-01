@@ -1,0 +1,33 @@
+@media screen and (max-width: 532px) {
+/*верхняя полоса*/
+ div.street address {font-size: 1.2em;}
+	div.phone p {font-size: 1.8em;}
+	div.e-mail {display: none;}
+    /*Блок переключения языка*/
+    div.lang p.lang_btn a {
+        padding: 0.5rem 0;
+    }
+
+    /*КОНТАКТЫ*/
+    .site-contact td {font-size: 1.5rem;}
+    .address-contact {font-size: 1.0rem;}
+
+
+    /*ПРОДУКЦИЯ*/
+    .site-bottle-archive h1,
+    .site-bottle-kpnv h1,
+    .site-bottle-kpnn h1,
+    .site-bottle-vkp h1,
+    .site-bottle-other h1 {
+        font-size: 1.8rem;
+    }
+    .site-bottle-archive h2,
+    .site-bottle-kpnv h2,
+    .site-bottle-kpnn h2,
+    .site-bottle-vkp h2,
+    .site-bottle-other h2 {
+        font-size: 1.4rem;
+    }
+
+
+}

@@ -1,0 +1,133 @@
+.content-wrapper {/*переопределенный стиль adminlte*/
+    background: url('/images/bsp_bg.jpg') 100% 100% no-repeat;
+    background-size: cover;
+}
+h1 {
+    color: #777;
+    background-color: white;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+/**Выравнивание блока по центру экрана
+*  на главной странице
+*/
+.site-index {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 0;
+}
+.site-index:before {
+     height: 100%;
+     display: inline-block;
+     vertical-align: middle;
+     content: '';
+ }
+.body-content {
+    display: inline-block;
+    white-space: normal;
+    vertical-align: middle;
+    text-align: left;
+}
+/*===========*/
+
+/*Кнопка на главной*/
+p>.btn-home {
+    border: 2px solid #fff;
+    color: #fff !important;
+    font-weight: bold;
+    opacity: .75;
+}
+p>.btn-home:hover {
+    color: #fff;
+    opacity: 1;
+}
+/*==================*/
+.summary {
+    background: #f5f5f5;
+    margin-top: 0.5rem;
+}
+.active-td td,
+.active-td th {
+    background: #f5f5f5;
+}
+
+.flex-block {/*блоки одинаковой высоты*/
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.my-flex-container_12 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.bg-img {
+    background: #ffffb6;
+    text-align: center;
+}
+.bg-img label.control-label {
+    display: block;
+}
+
+/*переопределение класса таблицы в AdminLte*/
+.table-bordered td,
+.table-bordered th {
+    border: 1px solid #ddd !important;
+}
+.table-bordered th {text-align: center;}
+
+.content-header > .breadcrumb {
+    padding: 8px 15px;
+    margin: 0 -10px 20px 12px;
+    list-style: none;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    float: none;
+    position: inherit;
+    font-size: 14px;
+}
+
+/*переопределенный стиль bootstrap*/
+.btn {
+    margin-bottom: 1rem;
+}
+
+.no-gutters {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+/*Переопределенный стиль site.css:
+слова должный переноситься на другую строкку,
+что не видет к выходу ширины таблицы за пределы
+установленной ширины
+*/
+.grid-view td {
+    white-space: normal;
+    word-wrap: break-word;
+    /*hyphens: auto;*/
+}
+.message td {max-width: 150px;}
+

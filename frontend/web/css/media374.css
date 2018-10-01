@@ -1,0 +1,64 @@
+@media screen and (max-width: 374px) {
+    /*верхняя полоса*/
+ div.street address {font-size: 1em;}
+    div.phone p {font-size: 1.5em;}
+    div.lang p.lang_btn {font-size: 1.35em;}
+
+    /*Блок переключения языка*/
+    div.lang p.lang_btn a {
+        font-size: .9rem;
+    }
+
+	/*Шапка, основная навигация*/
+   nav.main_menu ul li {font-size: 1.3em;}
+
+     /*ФУТЕР*/
+    .footer-logo {font-size: 2em;}
+    .footer-logo h2 {font-size: 1.3rem;}
+    /*.footer-logo h3 {padding-left: 1rem;}*/
+	.footer-phone-mail  {font-size: 1.2em;}
+    .nav-footer li {font-size: 0.8rem;}
+
+
+    /* ===================== */
+    /*ПОЛОСА БАНЕРОВ*/
+    /* ===================== */
+    .band-banner img {height: 3.5em;}
+
+
+    /*ГЛАВНАЯ*/
+    /*второй блок*/
+    .main-second-block p {font-size: 1.1rem;}
+
+    /*новинки*/
+    .new .carousel-item.active {height: 12rem}
+    .text-uppercase.new-main {padding: 2.9rem 0;}
+    .img-new {height: 12rem;}
+    .carousel-item .table-new td {font-size: .9rem;}
+    .new .carousel-indicators {bottom: -1rem;}
+
+    /*наши преимущества*/
+    .advantages p {font-size: 1.0rem;}
+
+    /*ЗАКУПКИ*/
+    .purchase-window h1 {font-size: 1.5rem}
+    .purchase-number {font-size: 0.95rem}
+
+
+    /*КОНТАКТЫ*/
+    .site-contact td {font-size: 1.3rem;}
+
+
+    /*ГАЛЕРЕЯ*/
+    /*prettyPhoto*/
+    .home-portfolio-text h2 {
+        font-size: 1.3rem;
+    }
+
+
+    /*ПРДУКЦИЯ*/
+    /*.button_feedback {display: none !important;}*/
+
+
+
+}

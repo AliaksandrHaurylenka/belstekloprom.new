@@ -1,0 +1,61 @@
+@media screen and (max-width: 991px) {
+  /*верхняя полоса*/
+	div.street address {font-size: 1.3em;}
+	div.phone p,
+	div.e-mail p {font-size: 1.9em;}
+
+/*Шапка, основная навигация*/
+   nav.main_menu ul li {font-size: 1.9em;}
+
+    /*выпадающее меню*/
+    li.dropdown ul li {
+        font-size: 1.2rem;
+    }
+
+/*ФУТЕР*/
+    .nav-footer li {font-size: 1rem;}
+     .footer-phone-mail  {font-size: 2em;}
+
+
+/*ГЛАВНАЯ*/
+    .certificate img {width: 8em;}
+    .main-second-block h1 {font-size: 1.7rem;}
+    /*новинки*/
+    .text-uppercase.new-main {padding: 5.8rem 0;}
+
+
+/*ЗАКУПКИ*/
+    .purchase-window h1 {font-size: 2.3rem}
+    .purchase-window p, .purchase-number {font-size: 1.4rem}
+    .purchase td {font-size: 1.15rem;}
+
+
+/*ПРОДУКЦИЯ*/
+    .site-bottle-archive h1,
+    .site-bottle-kpnv h1,
+    .site-bottle-kpnn h1,
+    .site-bottle-vkp h1,
+    .site-bottle-other h1 {
+        font-size: 2.2rem;
+    }
+    .site-bottle-archive h2,
+    .site-bottle-kpnv h2,
+    .site-bottle-kpnn h2,
+    .site-bottle-vkp h2,
+    .site-bottle-other h2 {
+        font-size: 1.8rem;
+    }
+    .menu-bottle li {font-size: 1rem}
+    .img-venchik {padding-bottom: 3rem;}
+    .product-img-info.venchik div:first-child {padding-left: 0}
+    .product-img-info.venchik div:last-child {padding-right: 0}
+    .button_feedback {position: static;}
+
+
+
+
+}
+
+
+
+

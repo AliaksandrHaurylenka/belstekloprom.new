@@ -1,0 +1,86 @@
+@media screen and (max-width: 767px) {
+/*ОБЩИЕ СТИЛИ*/
+    h1 {font-size: 2rem;}
+    h2 {font-size: 1.5rem;}
+	/*верхняя полоса*/
+	div.phone,
+	div.e-mail {padding: 0;}
+	div.street address {font-size: 1em;}
+	div.phone p,
+	div.e-mail p {font-size: 1.5em;}
+    div.lang p.lang_btn a {
+        font-size: 1.3rem;
+    }
+
+	/*Шапка, основное меню*/
+	.container-bg {margin-top: -0.5em;}
+    nav.main_menu ul li {font-size: 1.4em;}
+    li.dropdown ul li {
+        font-size: 1.6rem;
+    }
+
+    /*ФУТЕР*/
+    .footer-logo {font-size: 2.5em;}
+    .footer-logo h2 {font-size: 1.5rem;}
+    .footer-logo h3 {font-size: 0.9rem;}
+    .counter {display: none;}
+	/*.footer-phone-mail  {font-size: 1.5em;}*/
+	.footer-phone-mail div p {
+        text-align: center;
+        font-size: 1.1rem;
+    }
+	.footer-phone-mail img[alt="Телефон"],
+    .footer-phone-mail img[alt="Почта"]{display: none;}
+    .nav-footer li {font-size: .9rem;}
+
+
+    /* ===================== */
+    /*ПОЛОСА БАНЕРОВ*/
+    /* ===================== */
+    .band-banner img {height: 6em;}
+
+
+
+    /*ГЛАВНАЯ*/
+    /*первый блок*/
+    .certificate img {width: 6em;}
+    /*новинки*/
+    .text-uppercase.new-main {padding: 5rem 0;}
+
+
+    /*О ПРЕДПРИЯТИИ*/
+    .enterprise h1 {font-size: 2.0rem}
+    .enterprise h2 {font-size: 1.5rem}
+    .enterprise p {font-size: 1.3rem}
+    .enterprise ul li {font-size: 1.0rem}
+
+
+    /*ЗАКУПКИ*/
+    .purchase-window h1 {font-size: 2.2rem}
+    .purchase-window p, .purchase-number {font-size: 1.3rem}
+    .purchase td {font-size: 1.1rem;}
+
+
+    /*КОНТАКТЫ*/
+    .site-contact td {font-size: 1.2rem;}
+    .address-contact {font-size: 1.1rem;}
+
+
+    /*ПРОДУКЦИЯ*/
+    .site-bottle-archive h1,
+    .site-bottle-kpnv h1,
+    .site-bottle-kpnn h1,
+    .site-bottle-vkp h1,
+    .site-bottle-other h1 {
+        font-size: 2.0rem;
+    }
+    .site-bottle-archive h2,
+    .site-bottle-kpnv h2,
+    .site-bottle-kpnn h2,
+    .site-bottle-vkp h2,
+    .site-bottle-other h2 {
+        font-size: 1.6rem;
+    }
+
+
+}

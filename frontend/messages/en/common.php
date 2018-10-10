@@ -112,8 +112,11 @@ return [
 	'Цех приготовления шихты' => 'Preparation department of batch',
 	'Энергетическая служба' => 'Power engineering',
 	'Механическая служба' => 'Mechanics',
+  'Награды' => 'Rewards',
+  'О нас в интернете' => 'About us online',
 
 	//Продукция
 	'Стеклотара чертеж ' => 'Glass drawing ',
 	'Стеклянная бутылка ' => 'Glass bottle ',
+
 ];

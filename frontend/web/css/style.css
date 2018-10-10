@@ -445,6 +445,19 @@ li.active a {
 /*===============*/
 
 
+/* Новостная лента */
+.card-block h3 {
+  font-size: 1.3rem;
+}
+.news-text {
+  font-size: 1rem;
+}
+.news-text a {
+  color: inherit;
+}
+/* ================================ */
+
+
 
 
 

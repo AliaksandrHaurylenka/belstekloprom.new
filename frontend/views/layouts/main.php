@@ -39,6 +39,7 @@ set_time_limit (3);
 		<script>if(/*@cc_on!@*/false){document.documentElement.className+=' ie10';}</script>
 	<!--<![endif]-->
 	<?php $this->head() ?>
+
 </head>
 <body>
 <?php $this->beginBody() ?>

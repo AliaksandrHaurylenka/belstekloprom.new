@@ -88,6 +88,7 @@ $(document).ready(function () {
         path: '/'
     });
 
+
 });//конец ready
 
 

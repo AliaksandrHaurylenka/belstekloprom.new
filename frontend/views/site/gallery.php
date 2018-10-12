@@ -2,6 +2,7 @@
 
 use frontend\assets\PrettyPhotoAppAsset;
 use frontend\components\RewardsWidget;
+use frontend\components\GalleryWidget;
 use frontend\components\VideoWidget;
 use frontend\components\NewsWidget;
 use frontend\components\PhotoWidget;
@@ -14,6 +15,7 @@ $this->params['breadcrumbs'][]=$this->title;
 ?>
 <div class="m-2 site-gallery">
 
+  <?= GalleryWidget::widget(); ?>
   <?= RewardsWidget::widget(); ?>
   <?= NewsWidget::widget(); ?>
   <?= VideoWidget::widget(); ?>
@@ -24,7 +26,7 @@ $this->params['breadcrumbs'][]=$this->title;
     <hr>
     <ul class="portfolio-categ filter">
       <li><?= Yii::t('common', 'Категории') ?>:</li>
-      			<li class="all active"><a href="#"><?= Yii::t('common', 'Все') ?></a></li>
+      <li class="all active"><a href="#"><?= Yii::t('common', 'Все') ?></a></li>
       <li class="cat-item-1"><a href="#"><?= Yii::t('common', 'Заводоуправление') ?></a></li>
       <!-- <li class="cat-item-2"><a href="#"><? //= Yii::t('common', 'Производственный участок') ?></a></li>-->
       <li class="cat-item-3"><a href="#"><?= Yii::t('common', 'ОТК') ?></a></li>
@@ -33,6 +35,7 @@ $this->params['breadcrumbs'][]=$this->title;
       <!-- <li class="cat-item-6"><a href="#"><? //= Yii::t('common', 'Энергетическая служба') ?></a></li>-->
       <!-- <li class="cat-item-7"><a href="#"><? //= Yii::t('common', 'Механическая служба') ?></a></li>-->
       <li class="cat-item-8"><a href="#"><?= Yii::t('common', 'Лаборатория') ?></a></li>
+      <li data-toggle="modal" data-target=".bd-example-modal-lg"><a href="#">10 лет заводу</a></li>
     </ul>
 
     <ul class="row portfolio-area">

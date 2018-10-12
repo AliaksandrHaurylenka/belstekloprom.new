@@ -17,3 +17,8 @@ function getContentNews($string){
   return $string.'...';
 }
 
+function getImgGallery($dir){
+  $img = array_slice(scandir($dir), 2);
+  return $img;
+}
+

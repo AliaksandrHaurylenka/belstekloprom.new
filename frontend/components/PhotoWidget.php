@@ -8,6 +8,7 @@
 
 namespace frontend\components;
 use yii\base\Widget;
+use common\models\Gallery;
 
 class PhotoWidget extends Widget
 {
@@ -18,6 +19,7 @@ class PhotoWidget extends Widget
 
   public function run(){
     ob_get_clean();
-    return $this->render('photo');
+    $gallery = Gallery::getGallery();
+    return $this->render('photo', compact('gallery'));
   }
 }

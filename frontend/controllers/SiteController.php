@@ -187,8 +187,7 @@ class SiteController extends AppController
       'content' => 'Производственное унитарное предприятие БелСтеклоПром осуществляет постоянный контроль соответствия сырья всем требованиям и стандартам.'
     ]);
 
-    $gallery = Gallery::getGallery();
-    return $this->render('gallery', compact('gallery'));
+    return $this->render('gallery');
   }
 
 

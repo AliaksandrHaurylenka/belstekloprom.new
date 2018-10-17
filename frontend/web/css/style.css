@@ -455,6 +455,20 @@ li.active a {
 .news-text a {
   color: inherit;
 }
+/*.photos-materials .filter li:after{
+  content: '|';
+}*/
+.photos-materials .filter li{
+  border-right: 1px solid #0275d8;
+}
+.photos-materials .filter li:last-child,
+.photos-materials .filter li:first-child{
+  border: none;
+}
+
+.photos-materials .filter li a{
+  padding-right: 12px;
+}
 /* ================================ */
 
 

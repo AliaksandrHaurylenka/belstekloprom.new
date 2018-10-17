@@ -1,16 +1,28 @@
+<?
+$items = [
+  'Заводоуправление',
+  'ОТК',
+  'Лаборатория',
+//  'Производство',
+//  'Участок ремонта форм',
+//  'Составной',
+//  'Энергетики',
+//  'Механики',
+]
+?>
+
 <div class="photos-materials">
   <h2><?= Yii::t('common', 'Фото материалы') ?></h2>
+  <hr>
   <ul class="portfolio-categ filter">
     <li><?= Yii::t('common', 'Категории') ?>:</li>
-    <!--			<li class="all active"><a href="#">--><? //= Yii::t('common', 'Все') ?><!--</a></li>-->
-    <li class="cat-item-1"><a href="#"><?= Yii::t('common', 'Заводоуправление') ?></a></li>
-    <!-- <li class="cat-item-2"><a href="#"><? //= Yii::t('common', 'Производственный участок') ?></a></li>-->
-    <li class="cat-item-3"><a href="#"><?= Yii::t('common', 'ОТК') ?></a></li>
-    <!-- <li class="cat-item-4"><a href="#"><? //= Yii::t('common', 'Участок ретонта форм') ?></a></li>-->
-    <!-- <li class="cat-item-5"><a href="#"><? //= Yii::t('common', 'Цех приготовления шихты') ?></a></li>-->
-    <!-- <li class="cat-item-6"><a href="#"><? //= Yii::t('common', 'Энергетическая служба') ?></a></li>-->
-    <!-- <li class="cat-item-7"><a href="#"><? //= Yii::t('common', 'Механическая служба') ?></a></li>-->
-    <li class="cat-item-8"><a href="#"><?= Yii::t('common', 'Лаборатория') ?></a></li>
+    <li class="all active"><a href="#"><?= Yii::t('common', 'Все') ?></a></li>
+    <? $i=1; ?>
+    <? foreach($items as $item): ?>
+      <li class="cat-item-<?= $i; ?>"><a href="#"><?= Yii::t('common', $item) ?></a></li>
+    <? $i++; ?>
+    <? endforeach; ?>
+    <li data-toggle="modal" data-target=".bd-example-modal-lg"><a href="#">10 лет заводу</a></li>
   </ul>
 
   <ul class="row portfolio-area">

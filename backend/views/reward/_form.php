@@ -12,7 +12,7 @@ use yii\bootstrap\ActiveForm;
 <div class="col-sm-offset-3">
   <div class="col-sm-8 bg-img">
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data', 'class' => 'load']]); ?>
-    <?= $form->field($model, 'file_load[]')
+    <?= $form->field($model, 'imageFile')
         ->fileInput(
             [
                 'multiple' => true,

@@ -45,17 +45,7 @@ class RewardController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Reward model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+
 
     /**
      * Creates a new Reward model.
@@ -66,49 +56,28 @@ class RewardController extends Controller
     {
         $model = new Reward();
 
-        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        //     return $this->redirect(['view', 'id' => $model->id]);
-        // } else {
-        //     return $this->render('create', [
-        //         'model' => $model,
-        //     ]);
-        // }
-
-
-        //для одного файла UploadedFile::getInstance
-        if (Yii::$app->request->isPost) {
-            $model->file_load = UploadedFile::getInstances($model, 'file_load');
-            if ($model->upload()) {
-                Yii::$app->session->setFlash('success', 'Файлы загружены успешно!');
-                return $this->refresh();
-            }else {
-                Yii::$app->session->setFlash('error', 'Внимание! Файлы не загружены!!!');
+      //для нескольких файлов UploadedFile::getInstances
+        if ($model->load(Yii::$app->request->post())) {
+          $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+          if($model->validate()){
+            if ($model->imageFile && $model->upload() && $model->save()) {
+              $model->images = $model->imageFile->baseName . '.' . $model->imageFile->extension;
             }
-        }
-
-        return $this->render('create', [
-                'model' => $model,
-            ]);
+            if($model->save()){
+              Yii::$app->session->setFlash('success', 'Файлы загружены успешно!');
+              return $this->refresh();
+            }else {
+              Yii::$app->session->setFlash('error', 'Внимание! Файлы не загружены!!!');
+            }
+          }
+        }else {
+           return $this->render('create', [
+               'model' => $model,
+           ]);
+       }
     }
 
-    /**
-     * Updates an existing Reward model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
 
     /**
      * Deletes an existing Reward model.

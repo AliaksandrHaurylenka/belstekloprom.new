@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+//use yii\base\Model;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "reward".
@@ -13,9 +15,9 @@ use Yii;
 class Reward extends \yii\db\ActiveRecord
 {
     /**
-     * @var UploadedFile[]
+     * @var UploadedFile
      */
-    public $file_load;
+    public $imageFile;
 
 
     /**
@@ -32,12 +34,12 @@ class Reward extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['file_load'], 'file',
+            /*[['imageFile'], 'file',
                 'skipOnEmpty' => false,
                 'extensions' => ['png', 'jpg'],
                 'maxFiles' => 6,
                 'maxSize' => 1024*1024
-            ],
+            ],*/
         ];
     }
 
@@ -63,9 +65,11 @@ class Reward extends \yii\db\ActiveRecord
       //для загрузки нескольких файлов
       //значение вверху должно быть @var UploadedFile[]
       if ($this->validate()) {
-        foreach ($this->file_load as $file) {
-            $file->saveAs(Yii::getAlias('@frontend/web/images/gallery/reward/') . $file->baseName . '.' . $file->extension); 
-        }
+        $img = $this->imageFile;
+        $img->saveAs(Yii::getAlias('@frontend/web/images/gallery/reward/') . $img->baseName . '.' . $img->extension);
+        //        foreach ($this->images as $file) {
+//            $file->saveAs(Yii::getAlias('@frontend/web/images/gallery/reward/') . $file->baseName . '.' . $file->extension);
+//        }
         return true;
       } else {
         return false;

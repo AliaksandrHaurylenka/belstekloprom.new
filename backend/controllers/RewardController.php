@@ -38,43 +38,29 @@ class RewardController extends Controller
     {
         $searchModel = new RewardSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = new Reward();
+
+      //для нескольких файлов UploadedFile::getInstances
+      if ($model->load(Yii::$app->request->post())) {
+        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+        if($model->validate()){
+          if ($model->imageFile && $model->upload() && $model->save()) {
+            $model->images = $model->imageFile->baseName . '.' . $model->imageFile->extension;
+          }
+          if($model->save()){
+            Yii::$app->session->setFlash('success', 'Файлы загружены успешно!');
+            return $this->refresh();
+          }else {
+            Yii::$app->session->setFlash('error', 'Внимание! Файлы не загружены!!!');
+          }
+        }
+      }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+          'model' => $model,
         ]);
-    }
-
-
-
-    /**
-     * Creates a new Reward model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Reward();
-
-      //для нескольких файлов UploadedFile::getInstances
-        if ($model->load(Yii::$app->request->post())) {
-          $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-          if($model->validate()){
-            if ($model->imageFile && $model->upload() && $model->save()) {
-              $model->images = $model->imageFile->baseName . '.' . $model->imageFile->extension;
-            }
-            if($model->save()){
-              Yii::$app->session->setFlash('success', 'Файлы загружены успешно!');
-              return $this->refresh();
-            }else {
-              Yii::$app->session->setFlash('error', 'Внимание! Файлы не загружены!!!');
-            }
-          }
-        }else {
-           return $this->render('create', [
-               'model' => $model,
-           ]);
-       }
     }
 
 

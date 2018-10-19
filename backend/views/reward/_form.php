@@ -9,18 +9,17 @@ use yii\bootstrap\ActiveForm;
 ?>
 
 
-<div class="col-sm-offset-3">
-  <div class="col-sm-8 bg-img">
+<div class="row">
+  <div class="col-xs-4">
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data', 'class' => 'load']]); ?>
     <?= $form->field($model, 'imageFile')
         ->fileInput(
             [
                 'multiple' => true,
                 'accept' => 'image/*',
-                'class' => 'col-sm-offset-4',
             ]
         )
-        ->label('Фаил для загрузки')
+        ->label('Файл для загрузки')
     ?>
     <?= Html::submitButton('Загрузить', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
     <?php ActiveForm::end(); ?>

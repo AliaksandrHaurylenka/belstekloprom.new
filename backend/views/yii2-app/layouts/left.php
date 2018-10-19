@@ -42,6 +42,7 @@
                         ['label' => 'Изделия', 'icon' => 'table', 'url' => ['/bottle'],],
                         ['label' => 'Венчики', 'icon' => 'table', 'url' => ['/venchik'],],
                         ['label' => 'Галерея', 'icon' => 'table', 'url' => ['/gallery'],],
+                        ['label' => 'Награды', 'icon' => 'table', 'url' => ['/reward'],],
                         ['label' => 'Загрузить', 'icon' => 'table', 'url' => ['/upload'],],
                         ['label' => 'Удалить', 'icon' => 'table', 'url' => ['/del-img'],],
                         ['label' => 'Сообщения', 'icon' => 'table', 'url' => ['/save-message'],],

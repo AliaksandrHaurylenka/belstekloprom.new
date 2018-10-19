@@ -40,10 +40,10 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Изделия', 'url' => ['/bottle/index']],
         ['label' => 'Венчик', 'url' => ['/venchik/index']],
         ['label' => 'Галерея', 'url' => ['/gallery/index']],
+        ['label' => 'Награды', 'url' => ['/rewards/index']],
         ['label' => 'Загрузить', 'url' => ['/upload/index']],
         ['label' => 'Удалить', 'url' => ['/del-img/index']],
         ['label' => 'Сообщения', 'url' => ['/save-message/index']],

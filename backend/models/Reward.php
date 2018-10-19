@@ -67,9 +67,6 @@ class Reward extends \yii\db\ActiveRecord
       if ($this->validate()) {
         $img = $this->imageFile;
         $img->saveAs(Yii::getAlias('@frontend/web/images/gallery/reward/') . $img->baseName . '.' . $img->extension);
-        //        foreach ($this->images as $file) {
-//            $file->saveAs(Yii::getAlias('@frontend/web/images/gallery/reward/') . $file->baseName . '.' . $file->extension);
-//        }
         return true;
       } else {
         return false;

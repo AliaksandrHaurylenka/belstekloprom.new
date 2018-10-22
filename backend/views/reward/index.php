@@ -14,11 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-
-
-    <!--<p>
-        <?/*= Html::a('Create Reward', ['create'], ['class' => 'btn btn-success']) */?>
-    </p>-->
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,
@@ -37,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\ActionColumn',
                 'header'=>'Действия',
                 'headerOptions' => ['width' => '80'],
-                'template' => '{view} {delete}{link}',
+                'template' => '{delete}{link}',
             ],
         ],
     ]); ?>

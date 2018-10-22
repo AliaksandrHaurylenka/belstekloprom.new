@@ -2,6 +2,7 @@
 
 namespace frontend\components;
 use yii\base\Widget;
+use common\models\Reward;
 
 class RewardsWidget extends Widget{
 
@@ -12,7 +13,10 @@ class RewardsWidget extends Widget{
 
     public function run(){
         ob_get_clean();
-        return $this->render('rewards');
+
+      $rewards = Reward::find()->all();
+//        debug($rewards);
+        return $this->render('rewards', compact('rewards'));
     }
 
 } 

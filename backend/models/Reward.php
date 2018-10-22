@@ -67,9 +67,25 @@ class Reward extends ActiveRecord
       //значение вверху должно быть @var UploadedFile[]
       if ($this->validate()) {
         $img = $this->imageFile;
-        $img->saveAs(Yii::getAlias('@frontend/web/images/gallery/reward/') . $img->baseName . '.' . $img->extension);
+        $img->saveAs(Yii::getAlias('@images').'/gallery/reward/'.$img->baseName.'.'.$img->extension);
         return true;
       } else {
+        return false;
+      }
+    }
+
+
+    public function beforeDelete()
+    {
+      if (parent::beforeDelete()) {
+        $dir = Yii::getAlias('@images').'/gallery/reward/';
+        if(file_exists($dir.$this->images)){
+          unlink($dir.$this->images);
+        }
+        Yii::$app->session->setFlash('success', 'Файлы успешно удалены!');
+        return true;
+      } else {
+        Yii::$app->session->setFlash('error', 'Внимание! Файлы по каким-то причинам не удалились!!!');
         return false;
       }
     }

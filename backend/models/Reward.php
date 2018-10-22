@@ -3,8 +3,9 @@
 namespace app\models;
 
 use Yii;
-//use yii\base\Model;
+use yii\base\Model;
 use yii\web\UploadedFile;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "reward".
@@ -12,7 +13,8 @@ use yii\web\UploadedFile;
  * @property integer $id
  * @property string $images
  */
-class Reward extends \yii\db\ActiveRecord
+class Reward extends ActiveRecord
+//class Reward extends Model
 {
     /**
      * @var UploadedFile

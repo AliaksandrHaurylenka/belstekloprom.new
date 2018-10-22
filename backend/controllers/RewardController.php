@@ -44,7 +44,7 @@ class RewardController extends Controller
       if ($model->load(Yii::$app->request->post())) {
         $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
         if($model->validate()){
-          if ($model->imageFile && $model->upload() && $model->save()) {
+          if ($model->imageFile && $model->upload()) {
             $model->images = $model->imageFile->baseName . '.' . $model->imageFile->extension;
           }
           if($model->save()){

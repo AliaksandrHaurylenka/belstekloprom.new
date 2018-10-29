@@ -3,7 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use app\models\Reward;
+//use app\models\Reward;
+use common\models\Reward;
 use app\models\RewardSearch;
 use yii\web\Controller;
 use yii\web\UploadedFile;//прикрепление файлов

@@ -19,7 +19,7 @@ use yii\bootstrap\ActiveForm;
                 'accept' => 'image/*',
             ]
         )
-        ->label('Файл для загрузки')
+        ->label('Файл для загрузки < 1 Мб')
     ?>
     <?= Html::submitButton('Загрузить', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
     <?php ActiveForm::end(); ?>

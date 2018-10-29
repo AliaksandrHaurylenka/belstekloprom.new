@@ -10,6 +10,7 @@ use yii\web\UploadedFile;//прикрепление файлов
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+
 /**
  * RewardController implements the CRUD actions for Reward model.
  */
@@ -43,17 +44,12 @@ class RewardController extends Controller
       //для нескольких файлов UploadedFile::getInstances
       if ($model->load(Yii::$app->request->post())) {
         $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-        if($model->validate()){
-          if ($model->upload()) {
-            $model->images = $model->imageFile->baseName . '.' . $model->imageFile->extension;
-          }
-          if($model->save()){
+          if($model->save() && $model->upload()){
             Yii::$app->session->setFlash('success', 'Файлы загружены успешно!');
             return $this->refresh();
           }else {
             Yii::$app->session->setFlash('error', 'Внимание! Файлы не загружены!!!');
           }
-        }
       }
 
         return $this->render('index', [

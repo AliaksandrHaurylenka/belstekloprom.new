@@ -3,9 +3,8 @@
 namespace app\models;
 
 use Yii;
-use yii\base\Model;
-use yii\web\UploadedFile;
 use yii\db\ActiveRecord;
+use backend\models\UploadImages;
 
 /**
  * This is the model class for table "reward".
@@ -14,11 +13,8 @@ use yii\db\ActiveRecord;
  * @property string $images
  */
 class Reward extends ActiveRecord
-//class Reward extends Model
 {
-    /**
-     * @var UploadedFile
-     */
+
     public $imageFile;
 
 
@@ -36,11 +32,11 @@ class Reward extends ActiveRecord
     public function rules()
     {
         return [
-            /*[['imageFile'], 'file',
+            [['imageFile'], 'file',
                 'skipOnEmpty' => false,
                 'extensions' => ['png', 'jpg'],
                 'maxSize' => 1024*1024
-            ],*/
+            ],
         ];
     }
 
@@ -58,16 +54,11 @@ class Reward extends ActiveRecord
 
     public function upload()
     {
-      /**
-       * saveAs - путь для загрузки файла;
-       * далее имя и расширение файла
-       */
-
-      //для загрузки нескольких файлов
-      //значение вверху должно быть @var UploadedFile[]
       if ($this->validate()) {
         $img = $this->imageFile;
+        $this->images = $img->baseName.'.'.$img->extension;
         $img->saveAs(Yii::getAlias('@images').'/gallery/reward/'.$img->baseName.'.'.$img->extension);
+        $this->save(false);
         return true;
       } else {
         return false;
@@ -75,7 +66,8 @@ class Reward extends ActiveRecord
     }
 
 
-    public function beforeDelete()
+
+  public function beforeDelete()
     {
       if (parent::beforeDelete()) {
         $dir = Yii::getAlias('@images').'/gallery/reward/';

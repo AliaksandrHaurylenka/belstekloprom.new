@@ -3,6 +3,9 @@
 namespace common\models;
 
 use Yii;
+use yii\base\Security;
+
+//yii\base\Security;
 
 /**
  * This is the model class for table "reward".
@@ -50,10 +53,13 @@ class Reward extends \yii\db\ActiveRecord
 
   public function upload()
   {
+    $random = new Security();
+    $filename = $random->generateRandomString(10);
     if ($this->validate()) {
       $img = $this->imageFile;
-      $this->images = $img->baseName.'.'.$img->extension;
-      $img->saveAs(Yii::getAlias('@images').'/gallery/reward/'.$img->baseName.'.'.$img->extension);
+      $this->images = $filename.'.'.$img->extension;
+      $img->saveAs(Yii::getAlias('@images').'/gallery/reward/'.$filename.'.'.$img->extension);
+//      $img->saveAs(Yii::getAlias('@images').'/gallery/reward/'.$img->baseName.'.'.$img->extension);
       $this->save(false);
       return true;
     } else {

@@ -20,13 +20,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'options' => ['class' => 'grid-view'],
         'headerRowOptions' => ['class' => 'active'],
         'filterRowOptions' => ['class' => 'success'],
-        'rowOptions' => ['class' => 'active'],
+        'rowOptions' => ['class' => 'active text-center'],
         'tableOptions' => ['class' => 'table table-hover table-bordered'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            // 'id',
-            'images',
+            ['attribute' => 'image',
+                'value' => function($model) {
+                  if( ($image = $model->images) !== null ){
+                    return Html::img('/images/gallery/reward/' . $image, [
+                        'alt'=>'yii2 - картинка в gridview',
+                        'style' => 'width:120px;'
+                    ]) ;
+                  }
+                },
+                'format' => 'raw',
+            ],
 
             [
                 'class' => 'yii\grid\ActionColumn',

@@ -65,6 +65,12 @@ class Reward extends ActiveRecord
       }
     }
 
+  public function getImages()
+  {
+    $img = $this->imageFile->name;
+    return $img;
+  }
+
 
 
   public function beforeDelete()

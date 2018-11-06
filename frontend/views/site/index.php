@@ -13,7 +13,7 @@ FlexSliderAppAsset::register($this);
 $this->title = Yii::t('common', 'БелСтеклоПром.Производство стеклянной тары в Беларуси');
 //\frontend\controllers\debug($newBottle);//вывод на печать из вида
 ?>
-
+<?// debug("sdfd") ?>
 <!--Первый блок-->
 <div class="d-flex main-first-block">
 	<div class="col-sm-4 no-gutters d-flex justify-content-center align-items-center hidden-sm-down animation"><img

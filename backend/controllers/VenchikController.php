@@ -7,6 +7,7 @@ use common\models\Venchik;
 use backend\models\VenchikSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;//прикрепление файлов
 
 /**
  * VenchikController implements the CRUD actions for Venchik model.
@@ -62,15 +63,36 @@ class VenchikController extends AppController
      */
     public function actionCreate()
     {
+      $searchModel = new VenchikSearch();
+      $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = new Venchik();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id_venchik]);
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
+        }*/
+
+
+
+      if ($model->load(Yii::$app->request->post())) {
+        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+        $model->imageFile_1 = UploadedFile::getInstance($model, 'imageFile_1');
+        if($model->save() && $model->upload()){
+          Yii::$app->session->setFlash('success', 'Венчик добавлен успешно!');
+          return $this->refresh();
+        }else {
+          Yii::$app->session->setFlash('error', 'Внимание! Файлы не загружены!!!');
+          return $this->refresh();
         }
+      }else {
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+      }
+
     }
 
     /**

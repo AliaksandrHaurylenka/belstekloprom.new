@@ -21,7 +21,9 @@ ActiveFirstItemProductAsset::register($this);
       <!--меню венчики-->
       <?php foreach ($menuVenchik as $venchik_rus): ?>
         <li class="<?= $venchik_rus['venchik_id_for_code']; ?>">
-          <a class="nav-link menu-mobil-product" href="#"><?= Yii::t('common', 'Венчик ') . $venchik_rus['venchik_ru']; ?></a>
+          <a class="nav-link menu-mobil-product" href="#">
+            <?= Yii::t('common', 'Венчик ') . $venchik_rus['venchik_ru']; ?>
+          </a>
         </li>
       <?php endforeach ?>
 
@@ -54,7 +56,9 @@ ActiveFirstItemProductAsset::register($this);
     <!--меню венчики-->
     <?php foreach ($menuVenchik as $venchik_rus): ?>
       <li class="<?= $venchik_rus['venchik_id_for_code']; ?>">
-        <a class="nav-link" href="#"><?= Yii::t('common', 'Венчик ') . $venchik_rus['venchik_ru']; ?></a>
+        <a class="nav-link" href="#">
+          <?= Yii::t('common', 'Венчик ') . $venchik_rus['venchik_ru']; ?>
+        </a>
       </li>
     <?php endforeach ?>
 

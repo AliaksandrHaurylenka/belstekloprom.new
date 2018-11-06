@@ -32,7 +32,8 @@ class Reward extends \yii\db\ActiveRecord
         return [
             [['images'], 'string', 'max' => 255],
             [['imageFile'], 'file',
-                'skipOnEmpty' => true,
+//                'skipOnEmpty' => true,
+                'skipOnEmpty' => false,
                 'extensions' => ['png', 'jpg'],
                 'maxSize' => 1024*1024
             ],

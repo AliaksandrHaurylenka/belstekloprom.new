@@ -12,20 +12,15 @@ $this->params['breadcrumbs'][] = ['label' => 'Венчики', 'url' => ['index'
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
-<!--<div class="venchik-view col-sm-6 col-md-offset-3">-->
+
 <div class="row venchik-view bg-img no-margin">
-<!--  <div class="col-sm-6 col-sm-offset-3">-->
+
   <div class="col-sm-4 padding-vertical">
     <?= DetailView::widget([
         'model' => $model,
         'options' => ['class' => 'col-sm-6 table table-bordered active-td table-hover'],
         'attributes' => [
-            //'id_venchik',
             'venchik_ru',
-            //'venchik_en',
-//            'venchik_id_for_code',
-//            'img',
-//            'img_1',
         ],
     ]) ?>
 

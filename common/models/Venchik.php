@@ -82,6 +82,28 @@ class Venchik extends \yii\db\ActiveRecord
     }
   }
 
+
+  public function edit()
+  {
+
+    if ($this->validate()) {
+      $img = $this->imageFile;
+      $img_1 = $this->imageFile_1;
+      if(!empty($img)){
+        $this->img = $img->baseName.'.'.$img->extension;
+        $img->saveAs(Yii::getAlias('@images').'/bottle/'.$img->baseName.'.'.$img->extension);
+      }
+      if(!empty($img_1)){
+        $this->img_1 = $img_1->baseName.'.'.$img_1->extension;
+        $img_1->saveAs(Yii::getAlias('@images').'/bottle/'.$img_1->baseName.'.'.$img_1->extension);
+      }
+      $this->save(false);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   /**
    * menu VENCHIK
    */

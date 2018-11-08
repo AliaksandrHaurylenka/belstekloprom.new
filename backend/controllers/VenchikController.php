@@ -95,13 +95,30 @@ class VenchikController extends AppController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+      if ($model->load(Yii::$app->request->post())) {
+        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+        $model->imageFile_1 = UploadedFile::getInstance($model, 'imageFile_1');
+        if($model->save() && $model->edit()){
+          Yii::$app->session->setFlash('success', 'Венчик обнавлен!');
+          $this->refresh();
+          return $this->redirect(['view', 'id' => $model->id_venchik]);
+        }else {
+          Yii::$app->session->setFlash('error', 'Внимание! Файлы не загружены!!!');
+          return $this->refresh();
+        }
+      } else {
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+      }
+
+        /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id_venchik]);
         } else {
             return $this->render('update', [
                 'model' => $model,
             ]);
-        }
+        }*/
     }
 
     /**

@@ -36,7 +36,7 @@ use yii\widgets\ActiveForm;
   <div class="col-sm-8 padding-vertical">
     <div class="row">
       <?= Html::img('/frontend/web/images/bottle/'.$model->img_1, ['alt' => 'Чертеж', 'class' => 'col-md-6 img-responsive']) ?>
-      <?= Html::img('/frontend/web/images/bottle/'.$model->img, ['alt' => 'Чертеж', 'class' => 'col-md-6 img-responsive']) ?>
+      <?= Html::img('/frontend/web/images/bottle/'.$model->img, ['alt' => 'Фото', 'class' => 'col-md-6 img-responsive']) ?>
     </div>
   </div>
   </div>

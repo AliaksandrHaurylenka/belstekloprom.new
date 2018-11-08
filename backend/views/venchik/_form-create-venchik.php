@@ -29,12 +29,12 @@ use yii\widgets\ActiveForm;
   </div>
  <div class="col-sm-6">
    <?= $form->field($model, 'imageFile')
-       ->fileInput(['multiple' => true, 'accept' => 'image/*',])
+       ->fileInput(['multiple' => true, 'accept' => 'image/*', 'required' => 'required'])
        ->label('Фото венчика')
    ?>
 
    <?= $form->field($model, 'imageFile_1')
-       ->fileInput(['multiple' => true, 'accept' => 'image/*',])
+       ->fileInput(['multiple' => true, 'accept' => 'image/*', 'required' => 'required'])
        ->label('Чертеж венчика')
    ?>
   

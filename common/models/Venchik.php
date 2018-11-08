@@ -85,15 +85,22 @@ class Venchik extends \yii\db\ActiveRecord
 
   public function edit()
   {
+    $dir = Yii::getAlias('@images').'/bottle/';
 
     if ($this->validate()) {
       $img = $this->imageFile;
       $img_1 = $this->imageFile_1;
       if(!empty($img)){
+        if(file_exists($dir.$this->img)){
+          unlink($dir.$this->img);
+        }
         $this->img = $img->baseName.'.'.$img->extension;
         $img->saveAs(Yii::getAlias('@images').'/bottle/'.$img->baseName.'.'.$img->extension);
       }
       if(!empty($img_1)){
+        if(file_exists($dir.$this->img_1)){
+          unlink($dir.$this->img_1);
+        }
         $this->img_1 = $img_1->baseName.'.'.$img_1->extension;
         $img_1->saveAs(Yii::getAlias('@images').'/bottle/'.$img_1->baseName.'.'.$img_1->extension);
       }

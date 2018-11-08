@@ -63,18 +63,7 @@ class VenchikController extends AppController
      */
     public function actionCreate()
     {
-      $searchModel = new VenchikSearch();
-      $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $model = new Venchik();
-
-        /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_venchik]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }*/
-
+      $model = new Venchik();
 
 
       if ($model->load(Yii::$app->request->post())) {
@@ -82,7 +71,8 @@ class VenchikController extends AppController
         $model->imageFile_1 = UploadedFile::getInstance($model, 'imageFile_1');
         if($model->save() && $model->upload()){
           Yii::$app->session->setFlash('success', 'Венчик добавлен успешно!');
-          return $this->refresh();
+          $this->refresh();
+          return $this->redirect(['view', 'id' => $model->id_venchik]);
         }else {
           Yii::$app->session->setFlash('error', 'Внимание! Файлы не загружены!!!');
           return $this->refresh();

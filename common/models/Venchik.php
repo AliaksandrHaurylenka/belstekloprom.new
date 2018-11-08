@@ -39,8 +39,8 @@ class Venchik extends \yii\db\ActiveRecord
         [['venchik_ru', 'venchik_en', 'venchik_id_for_code'], 'string', 'max' => 12],
         [['img', 'img_1'], 'string', 'max' => 50],
         [['imageFile', 'imageFile_1'], 'file',
-            'skipOnEmpty' => false,
-//            'skipOnEmpty' => true,
+//            'skipOnEmpty' => false,
+            'skipOnEmpty' => true,
             'extensions' => ['png', 'jpg'],
             'maxSize' => 1024*1024
         ],
@@ -102,11 +102,12 @@ class Venchik extends \yii\db\ActiveRecord
    * $id принимает значение в зависимости от выбранного изделия
    */
 
+//  public static function getImgVenchik($id, $img)
   public static function getImgVenchik($id)
   {
     $imgBackendVenchik = self::find()
         ->asArray()
-        ->select('venchik_id_for_code')
+        ->select(['img', 'img_1'])
         ->where(['id_venchik' => $id])
         ->one();
 

@@ -11,32 +11,30 @@ $this->title = $model->venchik_ru;
 $this->params['breadcrumbs'][] = ['label' => 'Венчики', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="venchik-view col-sm-6 col-md-offset-3">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-  <div class="col-sm-6 col-sm-offset-3">
-    <p>
-        <?= Html::a('Редактировать', ['update', 'id' => $model->id_venchik], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id_venchik], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Вы точно желаете удалить венчик из базы?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
+<h1><?= Html::encode($this->title) ?></h1>
+<!--<div class="venchik-view col-sm-6 col-md-offset-3">-->
+<div class="row venchik-view bg-img no-margin">
+<!--  <div class="col-sm-6 col-sm-offset-3">-->
+  <div class="col-sm-4 padding-vertical">
     <?= DetailView::widget([
         'model' => $model,
-        'options' => ['class' => 'table table-bordered active-td table-hover'],
+        'options' => ['class' => 'col-sm-6 table table-bordered active-td table-hover'],
         'attributes' => [
             //'id_venchik',
             'venchik_ru',
             //'venchik_en',
-            //'venchik_id_for_code',
-            'img',
-            'img_1',
+//            'venchik_id_for_code',
+//            'img',
+//            'img_1',
+        ],
+    ]) ?>
+
+    <?= Html::a('Редактировать', ['update', 'id' => $model->id_venchik], ['class' => 'btn btn-primary']) ?>
+    <?= Html::a('Удалить', ['delete', 'id' => $model->id_venchik], [
+        'class' => 'btn btn-danger',
+        'data' => [
+            'confirm' => 'Вы точно желаете удалить венчик из базы?',
+            'method' => 'post',
         ],
     ]) ?>
 
@@ -44,19 +42,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
   <!--Вывод изображений изделий по принятому параметру id-->
-  <div class="bg-img" style="clear:both">
-    <?= Html::img(
-        '/frontend/web/images/bottle/' .
-        implode(Venchik::getImgVenchik($model->id_venchik)) . '_1.png',
-        ['alt' => 'Чертеж', 'style' => 'max-width: 60%']
-    )
-    ?>
-    <?= Html::img(
-        '/frontend/web/images/bottle/' .
-        implode(Venchik::getImgVenchik($model->id_venchik)) . '.png',
-        ['alt' => 'Фото', 'style' => 'max-width: 30%']
-    )
-    ?>
+  <div class="col-sm-8 padding-vertical">
+    <div class="row">
+      <?= Html::img('/frontend/web/images/bottle/'.$model->img_1, ['alt' => 'Чертеж', 'class' => 'col-md-6 img-responsive']) ?>
+      <?= Html::img('/frontend/web/images/bottle/'.$model->img, ['alt' => 'Чертеж', 'class' => 'col-md-6 img-responsive']) ?>
+    </div>
   </div>
 
 </div>

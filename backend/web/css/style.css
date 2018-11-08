@@ -119,6 +119,16 @@ p>.btn-home:hover {
     padding-left: 0;
 }
 
+.no-margin {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.padding-vertical {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
 /*Переопределенный стиль site.css:
 слова должный переноситься на другую строкку,
 что не видет к выходу ширины таблицы за пределы

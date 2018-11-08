@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use backend\models\UploadImages;
 use Yii;
 //use yii\data\Pagination;
 
@@ -65,7 +66,7 @@ class Venchik extends \yii\db\ActiveRecord
 
   public function upload()
   {
-    /*$file = new UploadImg();
+    /*$file = new UploadImages();
     $file->uploadFile($this->imageFile);*/
 
     if ($this->validate()) {

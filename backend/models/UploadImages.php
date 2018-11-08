@@ -33,7 +33,7 @@ class UploadImages extends Model
     ];
   }
 
-  public function upload($img)
+  public function uploadFile($img)
   {
     /**
      * saveAs - путь для загрузки файла;

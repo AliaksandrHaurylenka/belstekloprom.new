@@ -7,6 +7,7 @@ use common\models\Bottle;
 use backend\models\BottleSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;//прикрепление файлов
 
 /**
  * BottleController implements the CRUD actions for Bottle model.
@@ -64,13 +65,23 @@ class BottleController extends AppController
     {
         $model = new Bottle();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+      if ($model->load(Yii::$app->request->post())) {
+        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+        $model->imageFile_1 = UploadedFile::getInstance($model, 'imageFile_1');
+        $model->record();
+        if($model->save() && $model->upload()){
+          Yii::$app->session->setFlash('success', 'Новое изделие добавлено успешно!');
+          $this->refresh();
+          return $this->redirect(['view', 'id' => $model->id]);
+        }else {
+          Yii::$app->session->setFlash('error', 'Внимание! Файлы не загружены!!!');
+          return $this->refresh();
         }
+      }else {
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+      }
     }
 
 
@@ -84,13 +95,21 @@ class BottleController extends AppController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+      if ($model->load(Yii::$app->request->post())) {
+        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+        $model->imageFile_1 = UploadedFile::getInstance($model, 'imageFile_1');
+        $model->record();
+        if($model->save() && $model->edit()){
+          Yii::$app->session->setFlash('success', 'Изделие обнавлено!');
+          $this->refresh();
+          return $this->redirect(['view', 'id' => $model->id]);
+        }else {
+          Yii::$app->session->setFlash('error', 'Внимание! Файлы не загружены!!!');
+          return $this->refresh();
         }
+      } else{
+        return $this->render('update', ['model'=>$model,]);
+      }
     }
 
     /**

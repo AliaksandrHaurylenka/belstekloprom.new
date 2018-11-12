@@ -27,6 +27,8 @@ use Yii;
  */
 class Bottle extends \yii\db\ActiveRecord
 {
+  public $imageFile;
+  public $imageFile_1;
 
   /**
    * @inheritdoc
@@ -42,12 +44,18 @@ class Bottle extends \yii\db\ActiveRecord
   public function rules()
   {
     return [
-        [['type', 'venchik', 'venchik_en', 'height', 'dev_1', 'diameter', 'dev_2', 'name_1', 'name_2', 'dev_naliv', 'dev_massa', 'status'], 'required'],
+        [['type', 'venchik', 'venchik_en', 'height', 'dev_1', 'diameter', 'dev_2', 'name_1', 'dev_naliv', 'dev_massa'], 'required'],
         [['volume', 'number', 'full_naliv', 'massa'], 'integer'],
         [['height', 'diameter'], 'number'],
-        [['type', 'dev_1', 'dev_2', 'dev_naliv', 'dev_massa', 'status'], 'string', 'max' => 5],
+        [['type', 'dev_1', 'dev_2', 'dev_naliv', 'dev_massa', 'status'], 'string', 'max' => 7],
         [['venchik', 'venchik_en'], 'string', 'max' => 10],
         [['name_1', 'name_2'], 'string', 'max' => 30],
+        [['imageFile', 'imageFile_1'], 'file',
+          //            'skipOnEmpty' => false,
+            'skipOnEmpty' => true,
+            'extensions' => ['png'],
+            'maxSize' => 1024*1024
+        ],
     ];
   }
 
@@ -181,6 +189,93 @@ class Bottle extends \yii\db\ActiveRecord
     return $firstModal;
   }
 
+
+
+  public function upload()
+  {
+
+    if ($this->validate()) {
+      $img = $this->imageFile;
+      $img_1 = $this->imageFile_1;
+      $this->name_2 = $img->baseName;
+      $img->saveAs(Yii::getAlias('@images').'/bottle/'.$img->baseName.'.'.$img->extension);
+      $img_1->saveAs(Yii::getAlias('@images').'/bottle/'.$img_1->baseName.'.'.$img_1->extension);
+      $this->save(false);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
+  public function edit()
+  {
+    $dir = Yii::getAlias('@images').'/bottle/';
+
+    if ($this->validate()) {
+      $img = $this->imageFile;
+      $img_1 = $this->imageFile_1;
+      if(!empty($img)){
+        if(file_exists($dir.$this->name_2.'.png')){
+          unlink($dir.$this->name_2.'.png');
+        }
+        $this->name_2 = $img->baseName;
+        $img->saveAs(Yii::getAlias('@images').'/bottle/'.$img->baseName.'.'.$img->extension);
+      }
+      if(!empty($img_1)){
+        if(file_exists($dir.$this->name_2.'_1.png')){
+          unlink($dir.$this->name_2.'_1.png');
+        }
+        $img_1->saveAs(Yii::getAlias('@images').'/bottle/'.$img_1->baseName.'.'.$img_1->extension);
+      }
+      $this->save(false);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
+  public function beforeDelete()
+  {
+    if (parent::beforeDelete()) {
+      $dir = Yii::getAlias('@images').'/bottle/';
+      if(file_exists($dir.$this->name_2.'.png')){
+        unlink($dir.$this->name_2.'.png');
+      }
+      if(file_exists($dir.$this->name_2.'_1.png')){
+        unlink($dir.$this->name_2.'_1.png');
+      }
+      Yii::$app->session->setFlash('success', 'Запись успешно удалена!');
+      return true;
+    } else {
+      Yii::$app->session->setFlash('error', 'Внимание! Файлы по каким-то причинам не удалились!!!');
+      return false;
+    }
+  }
+
+
+
+  public function record()
+  {
+    if($this->venchik == 'КПНв'){
+      $this->venchik_en = 'kpnv';
+    }elseif($this->venchik == 'КПНн'){
+      $this->venchik_en = 'kpnn';
+    }elseif($this->venchik == 'ВКП' || $this->venchik == 'ВКП-1' || $this->venchik == 'ВКП-2'){
+      $this->venchik_en = 'vkp';
+    }else{
+      $this->venchik_en = 'other';
+    }
+
+  }
+
+
+
+  /*function debug($arr)
+  {//вывод на печать при отладке
+    echo '<pre>' . print_r($arr, true) . '</pre>';
+  }*/
 
 
 }

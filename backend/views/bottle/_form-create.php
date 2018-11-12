@@ -1,10 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
-use common\models\Bottle;
-use backend\components\FormCreateBottleWidget;
+
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Bottle */
@@ -24,124 +22,120 @@ $arr = [
 ?>
 
 <div class="bottle-form">
+  <?php $form = ActiveForm::begin(['options' => ['class' => 'row bg-img no-margin']]); ?>
+    <div class="col-sm-4">
+      <?= $form->field($model, 'name_1')->textInput(['maxlength' => true]) ?>
 
-  <?php $form = ActiveForm::begin(['options' => ['class' => 'col-sm-8 bg-img']]); ?>
-  <div class="col-sm-6">
-    <?= $form->field($model, 'name_1')->textInput(['maxlength' => true]) ?>
+      <?= $form->field($model, 'type')
+          ->radioList(
+              [
+                  'X' => 'X',
+                  'XVII' => 'XVII',
+              ], $arr
+          )
+      ?>
 
-    <?= $form->field($model, 'type')
-       ->radioList(
-           [
-               'X' => 'X',
-               'XVII' => 'XVII',
-           ], $arr
-       )
-    ?>
+      <?= $form->field($model, 'venchik')->dropDownList([
+          'КПНв' => 'КПНв',
+          'КПНн' => 'КПНн',
+          'ВКП' => 'ВКП',
+          'ВКП-1' => 'ВКП-1',
+          'ВКП-2' => 'ВКП-2',
+          'В-28-1' => 'В-28-1',
+          'К' => 'К',
+          'Ш' => 'Ш',
+          'П-29-А' => 'П-29-А',
+          'П-29-Б' => 'П-29-Б',
+      ]);
+      ?>
 
-    <?= $form->field($model, 'venchik')->dropDownList([
-        'КПНв' => 'КПНв',
-        'КПНн' => 'КПНн',
-        'ВКП' => 'ВКП',
-        'ВКП-1' => 'ВКП-1',
-        'ВКП-2' => 'ВКП-2',
-        'В-28-1' => 'В-28-1',
-        'К' => 'К',
-        'Ш' => 'Ш',
-        'П-29-А' => 'П-29-А',
-        'П-29-Б' => 'П-29-Б',
-    ]);
-    ?>
+      <?/*= $form->field($model, 'venchik_en')->dropDownList([
+          'kpnv' => 'kpnv',
+          'kpnn' => 'kpnn',
+          'vkp' => 'vkp',
+          'other' => 'other',
+      ])
+      */?>
 
-    <?= $form->field($model, 'venchik_en')->dropDownList([
-        'kpnv' => 'kpnv',
-        'kpnn' => 'kpnn',
-        'vkp' => 'vkp',
-        'other' => 'other',
-    ])
-    ?>
+      <?= $form->field($model, 'volume')->dropDownList([
+          '500' => '500',
+          '330' => '330',
+          '700' => '700',
+          '750' => '750',
+      ]) ?>
 
-    <?= $form->field($model, 'volume')->dropDownList([
-        '500' => '500',
-        '330' => '330',
-        '700' => '700',
-        '750' => '750',
-    ]) ?>
+      <?= $form->field($model, 'number')->textInput() ?>
+    </div>
 
-    <?= $form->field($model, 'number')->textInput() ?>
+    <div class="col-sm-4">
 
-    <?= $form->field($model, 'height')->textInput() ?>
+      <?= $form->field($model, 'height')->textInput() ?>
 
-    <?= $form->field($model, 'dev_1')
-        ->radioList(
-            [
-                '±1.3' => '±1.3',
-                '±1.6' => '±1.6',
-                '±1.7' => '±1.7',
-                '±1.8' => '±1.8',
+      <?= $form->field($model, 'dev_1')
+          ->radioList(
+              [
+                  '±1.3' => '±1.3',
+                  '±1.6' => '±1.6',
+                  '±1.7' => '±1.7',
+                  '±1.8' => '±1.8',
 
-            ], $arr
-        )
-    ?>
+              ], $arr
+          )
+      ?>
+      <?= $form->field($model, 'diameter')->textInput() ?>
 
-  </div>
+      <?= $form->field($model, 'dev_2')
+          ->radioList(
+              [
+                  '±1.2' => '±1.2',
+                  '±1.3' => '±1.3',
+                  '±1.4' => '±1.4',
 
-  <div class="col-sm-6">
-    <?= $form->field($model, 'diameter')->textInput() ?>
+              ], $arr
+          )
+      ?>
 
-    <?= $form->field($model, 'dev_2')
-        ->radioList(
-            [
-                '±1.2' => '±1.2',
-                '±1.3' => '±1.3',
-                '±1.4' => '±1.4',
+      <?= $form->field($model, 'full_naliv')->textInput() ?>
 
-            ], $arr
-        )
-    ?>
+    </div>
 
-    <?= $form->field($model, 'name_2')->textInput(['maxlength' => true, 'placeholder' => "имя фото, без расширения"]) ?>
+    <div class="col-sm-4">
+<!--      --><?//= $form->field($model, 'name_2')->textInput(['maxlength' => true, 'placeholder' => "имя фото, без расширения"]) ?>
 
-    <?= $form->field($model, 'full_naliv')->textInput() ?>
 
-    <?= $form->field($model, 'dev_naliv')
-        ->radioList(
-            [
-                '±7' => '±7',
-                '±10' => '±10',
-                '±15' => '±15',
-            ], $arr
-        )
-    ?>
+      <?= $form->field($model, 'dev_naliv')
+          ->radioList(
+              [
+                  '±7' => '±7',
+                  '±10' => '±10',
+                  '±15' => '±15',
+              ], $arr
+          )
+      ?>
 
-    <?= $form->field($model, 'massa')->textInput() ?>
+      <?= $form->field($model, 'massa')->textInput() ?>
 
-    <?= $form->field($model, 'dev_massa')
-        ->radioList(
-            [
-                '±10' => '±10',
-                '±15' => '±15',
-            ], $arr
-        )
-    ?>
+      <?= $form->field($model, 'dev_massa')
+          ->radioList(
+              [
+                  '±10' => '±10',
+                  '±15' => '±15',
+              ], $arr
+          )
+      ?>
 
-    <?= $form->field($model, 'status')
-        ->radioList(
-            [
-                'new' => 'new',
-                'old' => 'old',
-                'archive' => 'archive',
-            ], $arr
-        )
-    ?>
+      <?= $form->field($model, 'imageFile')
+          ->fileInput(['multiple' => true, 'accept' => 'image/*', 'required' => 'required'])
+          ->label('Фото изделия')
+      ?>
 
-    <!--<div class="form-group">
-      <?/*= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Редактировать', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) */?>
-    </div>-->
-  </div>
-  <div class="form-group">
-    <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Редактировать', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-  </div>
+      <?= $form->field($model, 'imageFile_1')
+          ->fileInput(['multiple' => true, 'accept' => 'image/*', 'required' => 'required'])
+          ->label('Чертеж изделия')
+      ?>
+      <div class="form-group">
+        <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Редактировать', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+      </div>
+    </div>
   <?php ActiveForm::end(); ?>
-
-
 </div>

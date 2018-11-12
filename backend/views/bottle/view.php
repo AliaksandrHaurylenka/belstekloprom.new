@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use common\models\Bottle;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Bottle */
@@ -11,7 +10,7 @@ $this->title = $model->name_1;
 $this->params['breadcrumbs'][] = ['label' => 'Изделия', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="bottle-view">
+<div class="row bottle-view no-margin">
 
   <div class="col-sm-6" style="padding-left: 0">
     <p>
@@ -45,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'dev_naliv',
             'massa',
             'dev_massa',
-            'status',
+//            'status',
         ],
         'template' => '<tr><th{captionOptions}>{label}</th><td{contentOptions}>{value}</td></tr>',
     ]) ?>
@@ -54,18 +53,14 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--Вывод изображений изделий по принятому параметру id-->
   <div class="col-sm-6 jumbotron bg-img">
     <h2><?= $model->name_1; ?></h2>
-    <?= Html::img(
+    <?= Html::img('/frontend/web/images/bottle/'.$model->name_2.'_1.png', ['alt' => 'Чертеж']) ?>
+    <?= Html::img('/frontend/web/images/bottle/'.$model->name_2.'.png', ['alt' => 'Фото']) ?>
+    <?/*= Html::img(
         '/frontend/web/images/bottle/' .
         implode(Bottle::getImgBottle($model->id)) . '_1.png',
         ['alt' => 'Чертеж']
       )
-    ?>
-    <?= Html::img(
-        '/frontend/web/images/bottle/' .
-        implode(Bottle::getImgBottle($model->id)) . '.png',
-        ['alt' => 'Фото']
-    )
-    ?>
+    */?>
   </div>
   <?//= print_r(Bottle::getImgBottle($model->id))?>
 

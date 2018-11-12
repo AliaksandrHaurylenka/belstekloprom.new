@@ -2,7 +2,6 @@
 
 namespace common\models;
 
-use backend\models\UploadImages;
 use Yii;
 //use yii\data\Pagination;
 
@@ -42,7 +41,7 @@ class Venchik extends \yii\db\ActiveRecord
         [['imageFile', 'imageFile_1'], 'file',
 //            'skipOnEmpty' => false,
             'skipOnEmpty' => true,
-            'extensions' => ['png', 'jpg'],
+            'extensions' => ['png'],
             'maxSize' => 1024*1024
         ],
     ];

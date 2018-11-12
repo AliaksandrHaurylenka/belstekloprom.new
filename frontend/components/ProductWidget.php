@@ -2,11 +2,10 @@
 
 namespace frontend\components;
 
-use Yii;
 use common\models\Bottle;
 use common\models\Venchik;
 use yii\base\Widget;
-use yii\data\Pagination;
+
 
 
 class ProductWidget extends Widget

@@ -11,9 +11,10 @@ $this->title = 'Добавить изделие в базу';
 $this->params['breadcrumbs'][] = ['label' => 'Изделия', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="bottle-create col-md-offset-3">
+<div class="bottle-create">
 
-  <h1 class="col-sm-8"><?= Html::encode($this->title) ?></h1>
+<!--  <h1 class="col-sm-8">--><?//= Html::encode($this->title) ?><!--</h1>-->
+  <h1><?= Html::encode($this->title) ?></h1>
 
   <?= $this->render('_form-create', [
        'model' => $model,

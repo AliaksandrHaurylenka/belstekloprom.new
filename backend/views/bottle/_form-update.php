@@ -37,14 +37,6 @@ use common\models\Bottle;
     ]);
     ?>
 
-    <?= $form->field($model, 'venchik_en')->dropDownList([
-        'kpnv' => 'kpnv',
-        'kpnn' => 'kpnn',
-        'vkp' => 'vkp',
-        'other' => 'other',
-    ])
-    ?>
-
     <?= $form->field($model, 'volume')->dropDownList([
         '500' => '500',
         '330' => '330',
@@ -58,13 +50,16 @@ use common\models\Bottle;
 
     <?= $form->field($model, 'dev_1')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'imageFile')
+        ->fileInput(['multiple' => true, 'accept' => 'image/*'])
+        ->label('Фото изделия')
+    ?>
   </div>
+
   <div class="col-sm-6">
     <?= $form->field($model, 'diameter')->textInput() ?>
 
     <?= $form->field($model, 'dev_2')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'name_2')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'full_naliv')->textInput() ?>
 
@@ -75,10 +70,15 @@ use common\models\Bottle;
     <?= $form->field($model, 'dev_massa')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'status')->dropDownList([
-        'new' => 'new',
-        'old' => 'old',
-        'archive' => 'archive',
+        'new' => 'Новое изделие',
+        'old' => 'Старое изделие',
+        'archive' => 'В архив',
     ])
+    ?>
+
+    <?= $form->field($model, 'imageFile_1')
+        ->fileInput(['multiple' => true, 'accept' => 'image/*'])
+        ->label('Чертеж изделия')
     ?>
 
     <div class="form-group">
@@ -89,21 +89,10 @@ use common\models\Bottle;
 
 
   <!--Вывод изображений изделий по принятому параметру id-->
-  <!-- implode() - переводит массив в строку -->
   <div class="col-sm-5 bg-img">
     <h2><?= $model->name_1; ?></h2>
-    <?= Html::img(
-        '/frontend/web/images/bottle/' .
-        implode(Bottle::getImgBottle($model->id)) . '_1.png',
-        ['alt' => 'Чертеж']
-    )
-    ?>
-    <?= Html::img(
-        '/frontend/web/images/bottle/' .
-        implode(Bottle::getImgBottle($model->id)) . '.png',
-        ['alt' => 'Фото']
-    )
-    ?>
+    <?= Html::img('/frontend/web/images/bottle/'.$model->name_2.'_1.png', ['alt' => 'Чертеж']) ?>
+    <?= Html::img('/frontend/web/images/bottle/'.$model->name_2.'.png', ['alt' => 'Фото']) ?>
   </div>
 
 </div>

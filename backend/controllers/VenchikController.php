@@ -106,19 +106,9 @@ class VenchikController extends AppController
           Yii::$app->session->setFlash('error', 'Внимание! Файлы не загружены!!!');
           return $this->refresh();
         }
-      } else {
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+      } else{
+        return $this->render('update', ['model'=>$model,]);
       }
-
-        /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_venchik]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }*/
     }
 
     /**

@@ -39,12 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
   <!--Вывод изображений изделий по принятому параметру id-->
   <div class="jumbotron bg-img">
     <h2 style="margin-bottom: 4rem; color: #777;"><?= $model->title; ?></h2>
-    <?= Html::img(
-        '/frontend/web/images/gallery/' .
-        implode(Gallery::getImgGallery($model->id)),
-        ['alt' => 'Фото']
-    )
-    ?>
+<!--    --><?//= Html::img(Yii::getAlias('@images').'/gallery/'.$model->photo_name, ['alt' => 'Фото']) ?>
+    <?= Html::img('/frontend/web/images/gallery/'.$model->photo_name, ['alt' => 'Фото']) ?>
   </div>
   <?//= print_r(Gallery::getImgGallery($model->id))?>
 

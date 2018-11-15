@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use common\models\Gallery;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Gallery */
@@ -11,15 +10,25 @@ use common\models\Gallery;
 
 <div class="gallery-form my-flex-container_12" style="background-color: white;">
   <div class="col-sm-4 bg-img">
-      <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(); ?>
 
-      <?= $form->field($model, 'photo_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-      <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'cat_item')->dropDownList([
+        '1' => 'Коммерческий отдел',
+        '2' => 'Отдел технического контроля',
+        '3' => 'Хим. лаборатория',
+        '4' => 'Производственный участок',
+        '5' => 'Участок ремонта форм',
+        '6' => 'Составной цех',
+        '7' => 'Энергитический участок',
+        '8' => 'Механический участок',
+    ]) ?>
 
-      <?= $form->field($model, 'alt')->textInput(['maxlength' => true]) ?>
-
-      <?= $form->field($model, 'cat_item')->textInput() ?>
+    <?= $form->field($model, 'imageFile')
+        ->fileInput(['multiple' => true, 'accept' => 'image/*'])
+        ->label('Фото подразделения')
+    ?>
 
       <div class="form-group">
           <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Редактировать', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -29,13 +38,7 @@ use common\models\Gallery;
   </div>
   <!--Вывод изображений изделий по принятому параметру id-->
   <div class="">
-<!--    <h2 style="margin-bottom: 4rem; color: #777;">--><?//= $model->title; ?><!--</h2>-->
-    <?= Html::img(
-        '/frontend/web/images/gallery/' .
-        implode(Gallery::getImgGallery($model->id)),
-        ['alt' => 'Фото']
-    )
-    ?>
+    <?= Html::img('/frontend/web/images/gallery/'.$model->photo_name, ['alt' => 'Фото']) ?>
   </div>
 
 </div>

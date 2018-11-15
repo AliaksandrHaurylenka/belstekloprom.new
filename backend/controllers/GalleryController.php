@@ -7,6 +7,7 @@ use common\models\Gallery;
 use backend\models\GallerySearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * GalleryController implements the CRUD actions for Gallery model.
@@ -62,15 +63,28 @@ class GalleryController extends AppController
      */
     public function actionCreate()
     {
+      $searchModel = new GallerySearch();
+      $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = new Gallery();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+
+      if ($model->load(Yii::$app->request->post())) {
+        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+        if($model->save() && $model->upload()){
+          Yii::$app->session->setFlash('success', 'Фото добавлено успешно!');
+          $this->refresh();
+          return $this->redirect(['view', 'id' => $model->id]);
+        }else {
+          Yii::$app->session->setFlash('error', 'Внимание! Файлы не загружены!!!');
+          return $this->refresh();
         }
+      }else {
+        return $this->render('create', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'model' => $model,
+        ]);
+      }
     }
 
     /**
@@ -83,13 +97,19 @@ class GalleryController extends AppController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+      if ($model->load(Yii::$app->request->post())) {
+        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+        if($model->save() && $model->edit()){
+          Yii::$app->session->setFlash('success', 'Фото изменено!');
+          $this->refresh();
+          return $this->redirect(['view', 'id' => $model->id]);
+        }else {
+          Yii::$app->session->setFlash('error', 'Внимание! Файлы не загружены!!!');
+          return $this->refresh();
         }
+      } else{
+        return $this->render('update', ['model'=>$model,]);
+      }
     }
 
     /**

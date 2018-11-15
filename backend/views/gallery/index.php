@@ -13,7 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="gallery-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Добавить фото', ['create'], ['class' => 'btn btn-success']) ?>
@@ -28,6 +27,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'tableOptions' => ['class' => 'table table-hover table-bordered'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+
+            ['attribute' => 'image',
+                'value' => function($model) {
+                  if( ($image = $model->photo_name) !== null ){
+                    return Html::img('/images/gallery/' . $image, [
+                        'alt'=>'yii2 - картинка в gridview',
+                        'style' => 'width:200px;'
+                    ]) ;
+                  }
+                },
+                'format' => 'raw',
+            ],
 
             //'id',
             //'photo_name',

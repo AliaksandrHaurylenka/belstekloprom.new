@@ -7,6 +7,7 @@
  */
 
 namespace frontend\components;
+
 use yii\base\Widget;
 use common\models\Gallery;
 

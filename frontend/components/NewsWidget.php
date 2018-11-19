@@ -7,7 +7,9 @@
  */
 
 namespace frontend\components;
+
 use yii\base\Widget;
+use common\models\News;
 
 class NewsWidget extends Widget
 {
@@ -18,6 +20,8 @@ class NewsWidget extends Widget
 
   public function run(){
     ob_get_clean();
-    return $this->render('news');
+
+    $news = News::find()->all();
+    return $this->render('news', compact('news'));
   }
 }

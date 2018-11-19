@@ -17,7 +17,7 @@ class RewardsWidget extends Widget{
 
       $rewards = Reward::find()->all();
 //        debug($rewards);
-        return $this->render('rewards', compact('rewards'));
+      return $this->render('rewards', compact('rewards'));
     }
 
 } 

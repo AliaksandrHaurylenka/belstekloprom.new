@@ -4,7 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\base\Security;
-use backend\models\UploadImages;
+
 
 //yii\base\Security;
 

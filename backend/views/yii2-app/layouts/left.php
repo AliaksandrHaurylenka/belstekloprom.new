@@ -43,6 +43,7 @@
                         ['label' => 'Венчики', 'icon' => 'table', 'url' => ['/venchik'],],
                         ['label' => 'Галерея', 'icon' => 'table', 'url' => ['/gallery'],],
                         ['label' => 'Награды', 'icon' => 'table', 'url' => ['/reward'],],
+                        ['label' => 'Новости', 'icon' => 'table', 'url' => ['/news'],],
                         ['label' => 'Сообщения', 'icon' => 'table', 'url' => ['/save-message'],],
 
                     ],

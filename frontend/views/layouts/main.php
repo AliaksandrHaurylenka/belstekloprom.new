@@ -85,6 +85,11 @@ set_time_limit (3);
 </div>
 
 <?php $this->endBody() ?>
+<script>
+  $(document).ready(function(){
+    $('[data-toggle="popover"]').popover("toggle");
+  });
+</script>
 </body>
 </html>
 <?php $this->endPage() ?>

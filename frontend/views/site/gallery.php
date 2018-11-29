@@ -8,7 +8,7 @@ use frontend\components\NewsWidget;
 use frontend\components\PhotoWidget;
 
 
-PrettyPhotoAppAsset::register($this);
+//PrettyPhotoAppAsset::register($this);
 
 $this->title=Yii::t('common', 'БелСтеклоПром.Галерея');
 $this->params['breadcrumbs'][]=$this->title;

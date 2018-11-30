@@ -41,6 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
               'format' => 'raw',
           ],
 
+          'title',
           'content:ntext',
 
 

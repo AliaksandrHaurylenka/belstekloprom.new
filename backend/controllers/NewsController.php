@@ -71,7 +71,7 @@ class NewsController extends Controller
       if ($model->load(Yii::$app->request->post())) {
         $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
         if($model->save() && $model->upload()){
-          Yii::$app->session->setFlash('success', 'Фото добавлено успешно!');
+          Yii::$app->session->setFlash('success', 'Новость добавлена успешно!');
           $this->refresh();
           return $this->redirect(['view', 'id' => $model->id]);
         }else {
@@ -100,7 +100,7 @@ class NewsController extends Controller
       if ($model->load(Yii::$app->request->post())) {
         $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
         if($model->save() && $model->edit()){
-          Yii::$app->session->setFlash('success', 'Фото изменено!');
+          Yii::$app->session->setFlash('success', 'Новость изменена!');
           $this->refresh();
           return $this->redirect(['view', 'id' => $model->id]);
         }else {

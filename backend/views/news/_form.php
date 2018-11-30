@@ -13,6 +13,8 @@ use yii\grid\GridView;
 
     <?php $form = ActiveForm::begin(['options' => ['class' => 'col-sm-6']]); ?>
 
+      <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+
       <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
 
       <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>

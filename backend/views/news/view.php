@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+            'title',
             'link',
 //            'img',
             'content:ntext',

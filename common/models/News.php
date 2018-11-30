@@ -34,6 +34,7 @@ class News extends \yii\db\ActiveRecord
             [['content'], 'string'],
             [['link'], 'string', 'max' => 255],
             [['img'], 'string', 'max' => 20],
+            [['title'], 'string', 'max' => 50],
             [['imageFile'], 'file',
                 'skipOnEmpty' => true,
                 'extensions' => ['jpg'],
@@ -52,6 +53,7 @@ class News extends \yii\db\ActiveRecord
             'link' => 'Ссылка на новость',
             'img' => 'Фото',
             'content' => 'Текст',
+            'title' => 'Название',
         ];
     }
 

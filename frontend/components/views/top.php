@@ -27,7 +27,7 @@ use yii\helpers\Html;
 <!--	          <img src="images/phone.png" alt="Телефон">-->
 	          <?= Html::img('@web/images/phone.png', ['alt' => 'Телефон']); ?>
           </div>
-          <p>+375(232)68-43-78</p>
+          <p><a href="tel:+375(232)68-43-78">+375(232)68-43-78</a></p>
         </div>
       </div>
 

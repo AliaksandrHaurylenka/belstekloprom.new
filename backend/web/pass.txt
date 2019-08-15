@@ -1,4 +1,0 @@
-вход в админку: корень/steklbelprom
-login: belstekloprom
-pass: beLSteKlopRom2008-site*/2015
-email: agavrilenko@belstekloprom.com
